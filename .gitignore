@@ -1,0 +1,98 @@
+# Delphi binary and intermediate files
+*.dcu
+*.dcp
+*.~*
+*.~??
+*.local
+*.rsm
+*.identcache
+*.obj
+*.map
+*.drc
+
+# Delphi project backup and configuration files
+*.cfg
+*.dof
+*.~bpl
+*.~dpk
+*.~dpr
+*.~pas
+*.~dfm
+
+# Delphi form and project state files
+*.dsk
+*.tvsconfig
+
+# Delphi-generated documentation files
+*.tds
+
+# Output directories
+Build/
+Output/
+Debug/
+Release/
+Win32/
+Win64/
+
+# Environment-specific files
+*.local
+*.log
+
+# IDE-specific files
+*.identcache
+*.local
+
+# User-specific configuration files
+*.groupproj.local
+*.groupproj
+*.groupproj.*.local
+
+# Backup files
+*.bak
+*.old
+
+# Executable and compiled libraries
+*.exe
+*.dll
+*.bpl
+*.dcp
+*.dproj.local
+
+# Project files that might be regenerated or are user-specific
+*.bdsproj
+*.bpi
+*.lib
+*.pdb
+
+# IDE settings and state
+__history/
+__recovery/
+__restore/
+
+# Unit test binaries and logs
+*.testresults
+*.results
+
+# Temporary files and directories
+tmp/
+temp/
+*.tmp
+*.~*
+
+# Delphi packages
+*.bpl
+*.dcp
+
+# Resource files
+*.res
+
+# Cache directories
+.cache/
+.idea/
+
+# Directory for local modules
+modules/
+
+# Other
+*.DS_Store
+*.orig

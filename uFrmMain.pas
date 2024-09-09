@@ -225,6 +225,7 @@ end;
 procedure TfrmMain.Button2Click(Sender: TObject);
 begin
    AureliusDatasetSite.Post;
+   AureliusManager.Save(TSite);
 end;
 
 procedure TfrmMain.ComboBox1Change(Sender: TObject);

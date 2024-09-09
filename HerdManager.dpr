@@ -8,7 +8,8 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uDataManager in 'database\uDataManager.pas' {DataManager: TDataModule},
-  uSiteModel in 'database\uSiteModel.pas';
+  uSiteModel in 'database\uSiteModel.pas',
+  uFrameSite in 'uFrameSite.pas' {FrameOurSites: TFrame};
 
 {$R *.res}
 

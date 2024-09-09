@@ -26,7 +26,8 @@ uses
   , FireDAC.Stan.Async
   , FireDAC.VCLUI.Wait, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
   Aurelius.Sql.Firebird, Aurelius.Schema.Firebird, Aurelius.Drivers.FireDac,
-  Aurelius.Comp.DBSchema
+  Aurelius.Comp.DBSchema, Vcl.BaseImageCollection, Vcl.ImageCollection,
+  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList
 
   ;
 
@@ -36,6 +37,9 @@ type
     FDConnection: TFDConnection;
     AureliusConnection: TAureliusConnection;
     AureliusDBSchema: TAureliusDBSchema;
+    VirtualImageList1: TVirtualImageList;
+    ImageCollection1: TImageCollection;
+    AureliusManager: TAureliusManager;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

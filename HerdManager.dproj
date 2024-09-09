@@ -136,6 +136,11 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="database\uSiteModel.pas"/>
+        <DCCReference Include="uFrameSite.pas">
+            <Form>FrameOurSites</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

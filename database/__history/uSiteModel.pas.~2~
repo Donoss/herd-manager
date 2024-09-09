@@ -1,0 +1,150 @@
+unit uSiteModel;
+
+interface
+
+uses
+  SysUtils, 
+  Generics.Collections, 
+  Aurelius.Mapping.Attributes, 
+  Aurelius.Types.Blob, 
+  Aurelius.Types.DynamicProperties, 
+  Aurelius.Types.Nullable, 
+  Aurelius.Types.Proxy;
+
+type
+  TSite = class;
+  TSiteContact = class;
+  
+  [Entity]
+  [Table('SITE')]
+  [Description('')]
+  [Id('FId', TIdGenerator.None)]
+  TSite = class
+  private
+    [Column('ID', [TColumnProp.Required], 36)]
+    [Description('Internal unique id')]
+    FId: string;
+    
+    [Column('SITE_TYPE', [TColumnProp.Required], 50)]
+    [Description('The type of site livestock can be moved off or moved onto e.g. Farm, Abattoir, Market etc.')]
+    FSiteType: string;
+    
+    [Column('NAME', [TColumnProp.Required], 100)]
+    [Description('A user defined name for the site.')]
+    FName: string;
+    
+    [Column('ADDRESS', [TColumnProp.Required], 255)]
+    [Description('The address of the site.')]
+    FAddress: string;
+    
+    [Column('POSTCODE', [TColumnProp.Required], 8)]
+    [Description('The postcode of the site.')]
+    FPostcode: string;
+    
+    [Column('STATE', [TColumnProp.Required], 15)]
+    [Description('The state of the site e.g. Active, Inactive.')]
+    FState: string;
+    
+    [Column('HOLDING_NUMBER', [], 11)]
+    [Description('If the site is an agricultural holding the Country Parish Holding Number.')]
+    FHoldingNumber: Nullable<string>;
+    
+    [Column('FSA_NUMBER', [], 11)]
+    [Description('If the site is an abattoir the FSA Registration Number.')]
+    FFsaNumber: Nullable<string>;
+    
+    [Column('PORT_NUMBER', [])]
+    [Description('If a site is a seaport or an airport the Port Number.')]
+    FPortNumber: Nullable<Integer>;
+    
+    [Column('OPERATOR_NAME', [], 100)]
+    [Description('The operators name, this may be the keeper for an agricultural Holding or the operators namne if an abattoir or rendereing site.')]
+    FOperatorName: Nullable<string>;
+    
+    [Column('OPERATOR_ADDRESS', [], 255)]
+    [Description('The operators address, this is the correspondence address and may be different to the site address.')]
+    FOperatorAddress: Nullable<string>;
+    
+    [Column('OPERATOR_POSTCODE', [], 8)]
+    [Description('The operators postcode.')]
+    FOperatorPostcode: Nullable<string>;
+    
+    [Column('OPERATOR_FLAG', [])]
+    [Description('A flag indicating if the site belongs to the application operator.')]
+    FOperatorFlag: Nullable<Boolean>;
+  public
+    property Id: string read FId write FId;
+    property SiteType: string read FSiteType write FSiteType;
+    property Name: string read FName write FName;
+    property Address: string read FAddress write FAddress;
+    property Postcode: string read FPostcode write FPostcode;
+    property State: string read FState write FState;
+    property HoldingNumber: Nullable<string> read FHoldingNumber write FHoldingNumber;
+    property FsaNumber: Nullable<string> read FFsaNumber write FFsaNumber;
+    property PortNumber: Nullable<Integer> read FPortNumber write FPortNumber;
+    property OperatorName: Nullable<string> read FOperatorName write FOperatorName;
+    property OperatorAddress: Nullable<string> read FOperatorAddress write FOperatorAddress;
+    property OperatorPostcode: Nullable<string> read FOperatorPostcode write FOperatorPostcode;
+    property OperatorFlag: Nullable<Boolean> read FOperatorFlag write FOperatorFlag;
+  end;
+  
+  [Entity]
+  [Table('SITE_CONTACTS')]
+  [Description('')]
+  [Id('FId', TIdGenerator.None)]
+  TSiteContact = class
+  private
+    [Column('ID', [TColumnProp.Required], 36)]
+    [Description('')]
+    FId: string;
+    
+    [Column('NAME', [TColumnProp.Required], 100)]
+    [Description('')]
+    FName: string;
+    
+    [Column('LANDLINE', [], 50)]
+    [Description('')]
+    FLandline: Nullable<string>;
+    
+    [Column('MOBILE', [], 50)]
+    [Description('')]
+    FMobile: Nullable<string>;
+    
+    [Column('EMAIL', [], 255)]
+    [Description('')]
+    FEmail: Nullable<string>;
+    
+    [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
+    [JoinColumn('SITE_ID', [TColumnProp.Required], 'ID')]
+    [Description('')]
+    FSiteId: Proxy<TSite>;
+    function GetSiteId: TSite;
+    procedure SetSiteId(const Value: TSite);
+  public
+    property Id: string read FId write FId;
+    property Name: string read FName write FName;
+    property Landline: Nullable<string> read FLandline write FLandline;
+    property Mobile: Nullable<string> read FMobile write FMobile;
+    property Email: Nullable<string> read FEmail write FEmail;
+    property SiteId: TSite read GetSiteId write SetSiteId;
+  end;
+  
+implementation
+
+{ TSiteContact }
+
+function TSiteContact.GetSiteId: TSite;
+begin
+  result := FSiteId.Value;
+end;
+
+procedure TSiteContact.SetSiteId(const Value: TSite);
+begin
+  FSiteId.Value := Value;
+end;
+
+initialization
+  RegisterEntity(TSite);
+  RegisterEntity(TSiteContact);
+
+end.

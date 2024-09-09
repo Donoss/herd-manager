@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{03019D38-D125-4AEC-9140-EBC9FD878929}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="HerdManager.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="HerdManager">
+        <MSBuild Projects="HerdManager.dproj"/>
+    </Target>
+    <Target Name="HerdManager:Clean">
+        <MSBuild Projects="HerdManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HerdManager:Make">
+        <MSBuild Projects="HerdManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="HerdManager"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="HerdManager:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="HerdManager:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

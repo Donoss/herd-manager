@@ -1,0 +1,25 @@
+object DataManager: TDataManager
+  Height = 480
+  Width = 640
+  object FDManager1: TFDManager
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 64
+    Top = 48
+  end
+  object FDConnection1: TFDConnection
+    Left = 64
+    Top = 128
+  end
+  object AureliusManager: TAureliusManager
+    Connection = AureliusConnection1
+    Left = 72
+    Top = 232
+  end
+  object AureliusConnection1: TAureliusConnection
+    Left = 176
+    Top = 184
+  end
+end

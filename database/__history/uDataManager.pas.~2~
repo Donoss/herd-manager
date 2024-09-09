@@ -1,0 +1,33 @@
+unit uDataManager;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Phys, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.VCLUI.Wait,
+  Aurelius.Engine.ObjectManager, Aurelius.Linq, Aurelius.Comp.Connection,
+  Aurelius.Comp.Manager, Data.DB, FireDAC.Comp.Client;
+
+type
+  TDataManager = class(TDataModule)
+    FDManager1: TFDManager;
+    FDConnection1: TFDConnection;
+    AureliusManager: TAureliusManager;
+    AureliusConnection1: TAureliusConnection;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataManager: TDataManager;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

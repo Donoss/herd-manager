@@ -1,0 +1,75 @@
+unit uSiteModel;
+
+interface
+
+uses
+  SysUtils, 
+  Generics.Collections, 
+  Aurelius.Mapping.Attributes, 
+  Aurelius.Types.Blob, 
+  Aurelius.Types.DynamicProperties, 
+  Aurelius.Types.Nullable, 
+  Aurelius.Types.Proxy;
+
+type
+  TSite = class;
+  
+  [Entity]
+  [Table('SITE')]
+  [Description('')]
+  [Id('FId', TIdGenerator.None)]
+  TSite = class
+  private
+    [Column('ID', [TColumnProp.Required], 36)]
+    [Description('')]
+    FId: string;
+    
+    [Column('HOLDING_NUMBER', [], 11)]
+    [Description('')]
+    FHoldingNumber: Nullable<string>;
+    
+    [Column('NAME', [TColumnProp.Required], 100)]
+    [Description('')]
+    FName: string;
+    
+    [Column('ADDRESS', [TColumnProp.Required], 255)]
+    [Description('')]
+    FAddress: string;
+    
+    [Column('POSTCODE', [TColumnProp.Required], 8)]
+    [Description('')]
+    FPostcode: string;
+    
+    [Column('STATE', [TColumnProp.Required], 15)]
+    [Description('')]
+    FState: string;
+    
+    [Column('FSA_NUMBER', [], 11)]
+    [Description('')]
+    FFsaNumber: Nullable<string>;
+    
+    [Column('PORT_NUMBER', [])]
+    [Description('')]
+    FPortNumber: Nullable<Integer>;
+    
+    [Column('SITE_TYPE', [TColumnProp.Required], 50)]
+    [Description('')]
+    FSiteType: string;
+  public
+    property Id: string read FId write FId;
+    property HoldingNumber: Nullable<string> read FHoldingNumber write FHoldingNumber;
+    property Name: string read FName write FName;
+    property Address: string read FAddress write FAddress;
+    property Postcode: string read FPostcode write FPostcode;
+    property State: string read FState write FState;
+    property FsaNumber: Nullable<string> read FFsaNumber write FFsaNumber;
+    property PortNumber: Nullable<Integer> read FPortNumber write FPortNumber;
+    property SiteType: string read FSiteType write FSiteType;
+  end;
+  
+implementation
+
+initialization
+  RegisterEntity(TSite);
+
+end.

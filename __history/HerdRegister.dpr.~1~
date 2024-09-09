@@ -1,0 +1,17 @@
+program HerdRegister;
+
+uses
+  Vcl.Forms,
+  uFrmMain in 'uFrmMain.pas' {Form4},
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Calypso');
+  Application.CreateForm(TForm4, Form4);
+  Application.Run;
+end.

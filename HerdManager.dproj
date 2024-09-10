@@ -69,7 +69,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <Custom_Styles>Calypso|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Calypso.vsf</Custom_Styles>
+        <Custom_Styles>&quot;Windows10 Green|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Green.vsf&quot;;Calypso|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Calypso.vsf;&quot;Calypso LE|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CalypsoLE.vsf&quot;;&quot;Calypso SE|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CalypsoSE.vsf&quot;;&quot;Calypso SLE|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CalypsoSLE.vsf&quot;;&quot;Material Oxford Blue|VCLSTYLE|$(BDSCOMMONDIR)\Styles\MaterialOxfordBlue.vsf&quot;</Custom_Styles>
         <SanitizedProjectName>HerdManager</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">

@@ -18,7 +18,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Calypso');
+  TStyleManager.TrySetStyle('Calypso SE');
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TDataManager, DataManager);
   Application.CreateForm(TFrmMaintSite, FrmMaintSite);

@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'Herd Manager'
   ClientHeight = 879
-  ClientWidth = 1974
+  ClientWidth = 1966
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -38,7 +38,7 @@ object frmMain: TfrmMain
       Hint = 'Holdings'
       Caption = 'Our Sites'
       ImageIndex = 3
-      ImageName = 'holding_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48'
+      ImageName = 'holding64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -53,7 +53,7 @@ object frmMain: TfrmMain
       Hint = 'Movements'
       Caption = 'Movements'
       ImageIndex = 4
-      ImageName = 'move_item_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48'
+      ImageName = 'move64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -67,7 +67,7 @@ object frmMain: TfrmMain
       Hint = 'Tagging'
       Caption = 'Tagging'
       ImageIndex = 6
-      ImageName = 'tag_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48'
+      ImageName = 'tag64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -81,7 +81,7 @@ object frmMain: TfrmMain
       Hint = 'Deaths'
       Caption = 'Deaths'
       ImageIndex = 2
-      ImageName = 'deceased_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48'
+      ImageName = 'deceased64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -96,7 +96,7 @@ object frmMain: TfrmMain
       Caption = 'Dashboard'
       Default = True
       ImageIndex = 1
-      ImageName = 'dashboard_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48'
+      ImageName = 'dashboard64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -112,7 +112,7 @@ object frmMain: TfrmMain
       Anchors = [akLeft, akBottom]
       Caption = 'Settings'
       ImageIndex = 5
-      ImageName = 'settings_64dp_E8EAED_FILL0_wght400_GRAD0_opsz24'
+      ImageName = 'settings64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -125,8 +125,8 @@ object frmMain: TfrmMain
       Height = 52
       Hint = 'Holdings'
       Caption = 'Other Sites'
-      ImageIndex = 15
-      ImageName = 'other_houses_64dp_E8EAED_FILL0_wght400_GRAD0_opsz48 (1)'
+      ImageIndex = 14
+      ImageName = 'otherSites64'
       Images = DataManager.VirtualImageList1
       ParentShowHint = False
       ShowHint = True
@@ -137,17 +137,17 @@ object frmMain: TfrmMain
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1974
+    Width = 1966
     Height = 49
     Align = alTop
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 1
     DesignSize = (
-      1974
+      1966
       49)
     object Label1: TLabel
-      Left = 1470
+      Left = 1462
       Top = 11
       Width = 50
       Height = 21
@@ -162,14 +162,14 @@ object frmMain: TfrmMain
       Align = alCustom
       Default = True
       ImageIndex = 0
-      ImageName = 'menu_64dp_E8EAED'
+      ImageName = 'menu64'
       Images = DataManager.VirtualImageList1
       TabOrder = 0
       StyleName = 'Calypso'
       OnClick = BitBtn1Click
     end
     object ComboBox1: TComboBox
-      Left = 1824
+      Left = 1816
       Top = 9
       Width = 147
       Height = 29
@@ -190,7 +190,7 @@ object frmMain: TfrmMain
         'All')
     end
     object ComboBox2: TComboBox
-      Left = 1543
+      Left = 1535
       Top = 8
       Width = 263
       Height = 29
@@ -212,39 +212,48 @@ object frmMain: TfrmMain
   inline FrameOurSites: TFrameOurSites
     Left = 200
     Top = 49
-    Width = 1774
+    Width = 1766
     Height = 830
     Align = alClient
     TabOrder = 2
     inherited Panel1: TPanel
-      Width = 1768
+      Width = 1760
     end
     inherited Panel3: TPanel
-      Width = 968
+      Width = 1060
       Height = 776
       inherited DBGrid1: TDBGrid
-        Width = 966
-        Height = 718
+        Width = 1058
+        Height = 711
       end
       inherited Panel2: TPanel
-        Width = 966
+        Top = 712
+        Width = 1058
+        Height = 63
         DesignSize = (
-          966
-          56)
+          1058
+          63)
         inherited btnAdd: TButton
-        end
-        inherited btnEdit: TButton
+          Width = 239
+          Height = 59
+          Anchors = [akLeft, akTop, akBottom]
         end
       end
     end
     inherited SplitView2: TSplitView
-      Left = 971
+      Left = 1063
       Height = 770
-      inherited Label11: TLabel
-        Top = 430
+      DesignSize = (
+        700
+        770)
+      inherited btnCloseSplit2: TBitBtn
+        OnClick = FrameOurSitesbtnCloseSplit2Click
       end
-      inherited DBGrid2: TDBGrid
-        Top = 430
+      inherited GroupBox1: TGroupBox
+      end
+      inherited GroupBox2: TGroupBox
+      end
+      inherited GroupBox3: TGroupBox
       end
     end
   end

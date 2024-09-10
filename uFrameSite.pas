@@ -16,35 +16,37 @@ type
     Panel3: TPanel;
     DBGrid1: TDBGrid;
     SplitView2: TSplitView;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
-    DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
     DBEdit7: TDBEdit;
     DBEdit8: TDBEdit;
     DBEdit9: TDBEdit;
-    DBGrid2: TDBGrid;
     btnCloseSplit2: TBitBtn;
     Panel2: TPanel;
     btnAdd: TButton;
-    btnEdit: TButton;
+    GroupBox1: TGroupBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    GroupBox2: TGroupBox;
+    Label2: TLabel;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
+    DBEdit2: TDBEdit;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
+    GroupBox3: TGroupBox;
+    DBGrid2: TDBGrid;
     procedure btnAddClick(Sender: TObject);
     procedure btnCloseSplit2Click(Sender: TObject);
-    procedure btnEditClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure OpenMaintSiteForm(AEditMode: TEditMode);
+    procedure SplitView2Closing(Sender: TObject);
+    procedure SplitView2Opening(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,17 +66,12 @@ end;
 
 procedure TFrameOurSites.btnCloseSplit2Click(Sender: TObject);
 begin
-  SplitView2.Close;
-end;
-
-procedure TFrameOurSites.btnEditClick(Sender: TObject);
-begin
-  OpenMaintSiteForm(emAdd);
+  SplitView2.Opened := not SplitView2.Opened;
 end;
 
 procedure TFrameOurSites.DBGrid1DblClick(Sender: TObject);
 begin
-   SplitView2.Open;
+  OpenMaintSiteForm(emEdit);
 end;
 
 procedure TFrameOurSites.OpenMaintSiteForm(AEditMode: TEditMode);
@@ -89,6 +86,16 @@ begin
   finally
     // Optionally free the form or handle cleanup as needed
   end;
+end;
+
+procedure TFrameOurSites.SplitView2Closing(Sender: TObject);
+begin
+  btnCloseSplit2.ImageName := 'previous64';
+end;
+
+procedure TFrameOurSites.SplitView2Opening(Sender: TObject);
+begin
+  btnCloseSplit2.ImageName := 'next64'
 end;
 
 end.

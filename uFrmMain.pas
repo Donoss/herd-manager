@@ -11,7 +11,7 @@ uses
   AdvTypes, Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
   
   System.Generics.Collections,
-  Vcl.Mask, Vcl.DBCtrls, uFrameSite;
+  Vcl.Mask, Vcl.DBCtrls, uFrameSite, Vcl.Menus, AdvMenus;
 
 type
   TfrmMain = class(TForm)
@@ -34,6 +34,7 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Frame11DBGrid1DblClick(Sender: TObject);
+    procedure FrameOurSitesbtnCloseSplit2Click(Sender: TObject);
     procedure SplitView1Closed(Sender: TObject);
     procedure SplitView1Opened(Sender: TObject);
   private
@@ -180,6 +181,12 @@ end;
 procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
 begin
   FrameOurSites.SplitView2.Open;
+end;
+
+procedure TfrmMain.FrameOurSitesbtnCloseSplit2Click(Sender: TObject);
+begin
+  FrameOurSites.btnCloseSplit2Click(Sender);
+
 end;
 
 procedure TfrmMain.SplitView1Closed(Sender: TObject);

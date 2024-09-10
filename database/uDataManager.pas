@@ -27,7 +27,11 @@ uses
   , FireDAC.VCLUI.Wait, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
   Aurelius.Sql.Firebird, Aurelius.Schema.Firebird, Aurelius.Drivers.FireDac,
   Aurelius.Comp.DBSchema, Vcl.BaseImageCollection, Vcl.ImageCollection,
-  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList
+  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
+  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset,
+
+  Aurelius.Criteria.Base,
+  Aurelius.Criteria.Linq, Aurelius.Criteria.Projections
 
   ;
 
@@ -40,7 +44,26 @@ type
     VirtualImageList1: TVirtualImageList;
     ImageCollection1: TImageCollection;
     AureliusManager: TAureliusManager;
+    dsSite: TDataSource;
+    AureliusDatasetSite: TAureliusDataset;
+    AureliusDatasetSiteId: TStringField;
+    AureliusDatasetSiteSiteType: TStringField;
+    AureliusDatasetSiteHoldingNumber: TStringField;
+    AureliusDatasetSiteName: TStringField;
+    AureliusDatasetSiteAddress: TStringField;
+    AureliusDatasetSitePostcode: TStringField;
+    AureliusDatasetSiteState: TStringField;
+    AureliusDatasetSiteOperatorName: TStringField;
+    AureliusDatasetSiteOperatorAddress: TStringField;
+    AureliusDatasetSiteOperatorPostcode: TStringField;
+    AureliusDatasetSiteOperatorFlag: TBooleanField;
+    dsContact: TDataSource;
+    AureliusDatasetContact: TAureliusDataset;
+    StringField1: TStringField;
+    AureliusDatasetSiteSiteDetailsFlag: TBooleanField;
+    AureliusDatasetSiteOperatorDetailsFlag: TBooleanField;
     procedure DataModuleCreate(Sender: TObject);
+    procedure GetOurSitesList;
   private
     { Private declarations }
     procedure UpdateDatabaseSchema;
@@ -55,11 +78,21 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
+uses uSiteModel;
+
 {$R *.dfm}
 
 procedure TDataManager.DataModuleCreate(Sender: TObject);
 begin
   UpdateDatabaseSchema;
+end;
+
+procedure TDataManager.GetOurSitesList;
+begin
+  AureliusDatasetSite.SetSourceList
+    (DataManager.AureliusManager.Find<TSite>.Where(TLinq.Eq('OperatorFlag',
+    True)).OrderBy('Name').List, True);
+  AureliusDatasetSite.Open;
 end;
 
 { TDataManager }

@@ -141,6 +141,11 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="uFrmMaintSite.pas">
+            <Form>FrmMaintSite</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uAppTypes.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

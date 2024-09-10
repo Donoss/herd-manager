@@ -9,10 +9,7 @@ uses
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.BaseImageCollection,
   Vcl.ImageCollection, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
   AdvTypes, Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset,
-  Aurelius.Engine.ObjectManager, Aurelius.Linq, Aurelius.Comp.Manager,
-  Aurelius.Criteria.Base,
-  Aurelius.Criteria.Linq, Aurelius.Criteria.Projections,
+  
   System.Generics.Collections,
   Vcl.Mask, Vcl.DBCtrls, uFrameSite;
 
@@ -31,7 +28,7 @@ type
     btnOurSites: TButton;
     btnOtherSites: TButton;
     ComboBox2: TComboBox;
-    FrameOurSites1: TFrameOurSites;
+    FrameOurSites: TFrameOurSites;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnOurSitesClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
@@ -141,13 +138,12 @@ begin
 end;
 
 procedure TfrmMain.btnOurSitesClick(Sender: TObject);
+
 begin
   AppContext := cOurSites;
-
+  DataManager.GetOurSitesList;
 
 end;
-
-
 
 procedure TfrmMain.ComboBox1Change(Sender: TObject);
 begin
@@ -183,7 +179,7 @@ end;
 
 procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
 begin
-  SplitView2.Open;
+  FrameOurSites.SplitView2.Open;
 end;
 
 procedure TfrmMain.SplitView1Closed(Sender: TObject);
@@ -218,25 +214,25 @@ begin
   end;
   with btnDashboard do
     Caption := cDashboard;
-    Hint := cDashboard;
+  Hint := cDashboard;
   with btnMovements do
     Caption := cMovements;
-    Hint := cMovements;
+  Hint := cMovements;
   with btnTagging do
-      Caption := cTagging;
-    Hint := cTagging;
+    Caption := cTagging;
+  Hint := cTagging;
   with btnDeaths do
     Caption := cDeaths;
-    Hint := cDeaths;
+  Hint := cDeaths;
   with btnOurSites do
     Caption := cOurSites;
-    Hint := cOurSites;
+  Hint := cOurSites;
   with btnOtherSites do
     Caption := cOtherSites;
-    Hint := cOtherSites;
+  Hint := cOtherSites;
   with btnSettings do
     Caption := cSettings;
-    Hint := cSettings;
+  Hint := cSettings;
 
 end;
 

@@ -177,9 +177,7 @@ object frmMain: TfrmMain
       AutoDropDown = True
       Style = csDropDownList
       Anchors = [akTop, akRight]
-      ItemIndex = 7
       TabOrder = 1
-      Text = 'All'
       OnChange = ComboBox1Change
       Items.Strings = (
         'Cattle'
@@ -211,7 +209,7 @@ object frmMain: TfrmMain
         'Langsett Farm')
     end
   end
-  inline FrameOurSites1: TFrameOurSites
+  inline FrameOurSites: TFrameOurSites
     Left = 200
     Top = 49
     Width = 1774
@@ -222,34 +220,32 @@ object frmMain: TfrmMain
       Width = 1768
     end
     inherited Panel3: TPanel
-      Width = 848
+      Width = 968
       Height = 776
       inherited DBGrid1: TDBGrid
-        Width = 846
-        Height = 774
+        Width = 966
+        Height = 718
+      end
+      inherited Panel2: TPanel
+        Width = 966
+        DesignSize = (
+          966
+          56)
+        inherited btnAdd: TButton
+        end
+        inherited btnEdit: TButton
+        end
       end
     end
     inherited SplitView2: TSplitView
-      Left = 851
+      Left = 971
       Height = 770
-      OnOpened = nil
-      inherited Panel4: TPanel
+      inherited Label11: TLabel
+        Top = 430
       end
-      inherited btnCancel: TButton
-        Top = 693
+      inherited DBGrid2: TDBGrid
+        Top = 430
       end
-      inherited btnSave: TButton
-        Top = 693
-      end
-      inherited btnAdd: TButton
-        Top = 693
-      end
-      inherited btnEdit: TButton
-        Top = 693
-      end
-    end
-    inherited AureliusDatasetSite: TAureliusDataset
-      DesignClass = 'Sphinx.Entities.TUser'
     end
   end
 end

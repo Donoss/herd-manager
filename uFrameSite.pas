@@ -7,7 +7,8 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls,
   Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.WinXCtrls, Vcl.Grids,
   Vcl.DBGrids, Aurelius.Engine.ObjectManager, Aurelius.Linq,
-  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset, Aurelius.Comp.Manager;
+  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset, Aurelius.Comp.Manager,
+  scControls, scAdvancedControls, uAppTypes;
 
 type
   TFrameOurSites = class(TFrame)
@@ -25,8 +26,6 @@ type
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
-    Panel4: TPanel;
-    BitBtn2: TBitBtn;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
@@ -37,28 +36,15 @@ type
     DBEdit8: TDBEdit;
     DBEdit9: TDBEdit;
     DBGrid2: TDBGrid;
-    btnCancel: TButton;
-    btnSave: TButton;
-    dsSite: TDataSource;
-    AureliusDatasetSite: TAureliusDataset;
-    AureliusDatasetSiteId: TStringField;
-    AureliusDatasetSiteSiteType: TStringField;
-    AureliusDatasetSiteHoldingNumber: TStringField;
-    AureliusDatasetSiteName: TStringField;
-    AureliusDatasetSiteAddress: TStringField;
-    AureliusDatasetSitePostcode: TStringField;
-    AureliusDatasetSiteState: TStringField;
-    AureliusDatasetSiteOperatorName: TStringField;
-    AureliusDatasetSiteOperatorAddress: TStringField;
-    AureliusDatasetSiteOperatorPostcode: TStringField;
-    AureliusDatasetSiteOperatorFlag: TBooleanField;
+    btnCloseSplit2: TBitBtn;
+    Panel2: TPanel;
     btnAdd: TButton;
     btnEdit: TButton;
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btnAddClick(Sender: TObject);
+    procedure btnCloseSplit2Click(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
-    procedure btnCancelClick(Sender: TObject);
-    procedure btnSaveClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure OpenMaintSiteForm(AEditMode: TEditMode);
   private
     { Private declarations }
   public
@@ -69,35 +55,40 @@ implementation
 
 {$R *.dfm}
 
-uses uFrmMain, uSiteModel, uDataManager;
+uses uFrmMain, uFrmMaintSite, uDataManager;
 
-procedure TFrameOurSites.BitBtn2Click(Sender: TObject);
+procedure TFrameOurSites.btnAddClick(Sender: TObject);
+begin
+  OpenMaintSiteForm(emAdd);
+end;
+
+procedure TFrameOurSites.btnCloseSplit2Click(Sender: TObject);
 begin
   SplitView2.Close;
 end;
 
 procedure TFrameOurSites.btnEditClick(Sender: TObject);
 begin
-  SplitView2.Open;
-  if AppContext = cOurSites then
-    AureliusDatasetSite.Edit;
-end;
-
-procedure TFrameOurSites.btnCancelClick(Sender: TObject);
-begin
-  AureliusDatasetSite.Cancel;
-  SplitView2.Close;
-end;
-
-procedure TFrameOurSites.btnSaveClick(Sender: TObject);
-begin
-  AureliusDatasetSite.Post;
-  AureliusManager.Flush;
+  OpenMaintSiteForm(emAdd);
 end;
 
 procedure TFrameOurSites.DBGrid1DblClick(Sender: TObject);
 begin
    SplitView2.Open;
+end;
+
+procedure TFrameOurSites.OpenMaintSiteForm(AEditMode: TEditMode);
+begin
+  // Check if FrmMaintSite is nil or create a new instance
+  if not Assigned(FrmMaintSite) then
+    FrmMaintSite := TFrmMaintSite.Create(nil);
+
+  try
+    FrmMaintSite.SetEditMode(AEditMode);  // Pass Add or Edit mode
+    FrmMaintSite.ShowModal;  // Open the form modally (or Show if non-modal)
+  finally
+    // Optionally free the form or handle cleanup as needed
+  end;
 end;
 
 end.

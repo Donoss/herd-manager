@@ -237,6 +237,7 @@ object frmMain: TfrmMain
           Width = 239
           Height = 59
           Anchors = [akLeft, akTop, akBottom]
+          OnClick = FrameOurSitesbtnAddClick
         end
       end
     end
@@ -248,12 +249,6 @@ object frmMain: TfrmMain
         770)
       inherited btnCloseSplit2: TBitBtn
         OnClick = FrameOurSitesbtnCloseSplit2Click
-      end
-      inherited GroupBox1: TGroupBox
-      end
-      inherited GroupBox2: TGroupBox
-      end
-      inherited GroupBox3: TGroupBox
       end
     end
   end

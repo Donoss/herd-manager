@@ -84,7 +84,7 @@ begin
     FrmMaintSite.SetEditMode(AEditMode);  // Pass Add or Edit mode
     FrmMaintSite.ShowModal;  // Open the form modally (or Show if non-modal)
   finally
-    // Optionally free the form or handle cleanup as needed
+    DataManager.dsSite.DataSet.Refresh;
   end;
 end;
 

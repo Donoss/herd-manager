@@ -34,6 +34,7 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Frame11DBGrid1DblClick(Sender: TObject);
+    procedure FrameOurSitesbtnAddClick(Sender: TObject);
     procedure FrameOurSitesbtnCloseSplit2Click(Sender: TObject);
     procedure SplitView1Closed(Sender: TObject);
     procedure SplitView1Opened(Sender: TObject);
@@ -181,6 +182,12 @@ end;
 procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
 begin
   FrameOurSites.SplitView2.Open;
+end;
+
+procedure TfrmMain.FrameOurSitesbtnAddClick(Sender: TObject);
+begin
+  FrameOurSites.btnAddClick(Sender);
+
 end;
 
 procedure TfrmMain.FrameOurSitesbtnCloseSplit2Click(Sender: TObject);

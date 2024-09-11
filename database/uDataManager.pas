@@ -56,12 +56,12 @@ type
     AureliusDatasetSiteOperatorName: TStringField;
     AureliusDatasetSiteOperatorAddress: TStringField;
     AureliusDatasetSiteOperatorPostcode: TStringField;
-    AureliusDatasetSiteOperatorFlag: TBooleanField;
     dsContact: TDataSource;
     AureliusDatasetContact: TAureliusDataset;
     StringField1: TStringField;
     AureliusDatasetSiteSiteDetailsFlag: TBooleanField;
     AureliusDatasetSiteOperatorDetailsFlag: TBooleanField;
+    AureliusDatasetSiteOperatorFlag: TBooleanField;
     procedure DataModuleCreate(Sender: TObject);
     procedure GetOurSitesList;
   private
@@ -69,6 +69,7 @@ type
     procedure UpdateDatabaseSchema;
   public
     { Public declarations }
+     procedure ValidateEntity(Entity: TObject);
   end;
 
 var
@@ -109,6 +110,20 @@ begin
     DBManager.Free;
   end;
 
+end;
+
+procedure TDataManager.ValidateEntity(Entity: TObject);
+begin
+   try
+    // Use Aurelius' Validate method to validate the entity
+    AureliusManager.ObjManager.Validate(Entity);
+  except
+    on E: Exception do
+    begin
+      // You can centralize error reporting here as well
+      raise Exception.Create('Validation failed: ' + E.Message);
+    end;
+  end;
 end;
 
 end.

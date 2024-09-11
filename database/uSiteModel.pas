@@ -7,7 +7,8 @@ uses
   Generics.Collections,
   Aurelius.Mapping.Attributes,
   Aurelius.Types.Nullable,
-  Aurelius.Types.Proxy;
+  Aurelius.Types.Proxy,
+  Aurelius.Validation.Attributes;
 
 type
   TSite = class;
@@ -15,34 +16,47 @@ type
   [Automapping]
   [Entity]
   [Table('SITE')]
+  [Id('FId', TIdGenerator.Uuid36)]
   TSite = class
   private
-    [Column('ID', [TColumnProp.Required], 36)]
+    [Column('ID', [TColumnProp.Required, TColumnProp.NoUpdate], 36)]
     [Description('Internal unique id')]
     FId: string;
 
     [Column('SITE_TYPE', [TColumnProp.Required], 50)]
     [Description('The type of site livestock can be moved off or moved onto e.g. Farm, Abattoir, Market etc.')]
+    [Required]
+    [DisplayName('Site Type')]
     FSiteType: string;
 
-    [Column('IDENTIFIER', [], 50)]
+    [Column('IDENTIFIER', [TColumnProp.Required], 50)]
     [Description('Identifier of the site, this may be a CPH, an FSA Number or a Port Number depending on the Type of Site.')]
-    FIdentifier: Nullable<string>;
+    [Required]
+    [DisplayName('Holding Number')]
+    [SiteIdentifier('You must provide a valid holding number for the site in fiel;d "0:s"')]
+    FIdentifier: string;
 
     [Column('NAME', [TColumnProp.Required], 100)]
     [Description('A user defined name for the site.')]
+    [Required]
+    [DisplayName('Site Name')]
     FName: string;
 
     [Column('ADDRESS', [TColumnProp.Required], 255)]
     [Description('The address of the site.')]
+    [Required]
+    [DisplayName('Site Address')]
     FAddress: string;
 
     [Column('POSTCODE', [TColumnProp.Required], 8)]
     [Description('The postcode of the site.')]
+    [Required]
+    [DisplayName('Site Postcode')]
     FPostcode: string;
 
     [Column('STATE', [TColumnProp.Required], 15)]
     [Description('The state of the site e.g. Active, Inactive.')]
+    [Required]
     FState: string;
 
     [Column('OPERATOR_NAME', [], 100)]
@@ -57,9 +71,10 @@ type
     [Description('The operators postcode.')]
     FOperatorPostcode: Nullable<string>;
 
-    [Column('OPERATOR_FLAG', [], 5)]
+    [Column('OPERATOR_FLAG', [TColumnProp.Required])]
     [Description('A flag indicating if the site belongs to the application operator, values are True, False.')]
-    FOperatorFlag: string;
+    [Required]
+    FOperatorFlag: boolean;
 
     [ManyValuedAssociation([TAssociationProp.Lazy, TAssociationProp.Required], [TCascadeType.SaveUpdate, TCascadeType.Merge, TCascadeType.Remove], 'FSiteId')]
     FSiteContactList: Proxy<TList<TSiteContact>>;
@@ -71,7 +86,7 @@ type
 
     property Id: string read FId write FId;
     property SiteType: string read FSiteType write FSiteType;
-    property Identifier: Nullable<string> read FIdentifier write FIdentifier;
+    property Identifier: string read FIdentifier write FIdentifier;
     property Name: string read FName write FName;
     property Address: string read FAddress write FAddress;
     property Postcode: string read FPostcode write FPostcode;
@@ -80,7 +95,7 @@ type
     property OperatorName: Nullable<string> read FOperatorName write FOperatorName;
     property OperatorAddress: Nullable<string> read FOperatorAddress write FOperatorAddress;
     property OperatorPostcode: Nullable<string> read FOperatorPostcode write FOperatorPostcode;
-    property OperatorFlag: string read FOperatorFlag write FOperatorFlag;
+    property OperatorFlag: boolean read FOperatorFlag write FOperatorFlag;
 
     // Use getter for lazy-loaded contacts
     property SiteContactList: TList<TSiteContact> read GetSiteContactList;
@@ -89,6 +104,7 @@ type
   [Automapping]
   [Entity]
   [Table('SITE_CONTACT')]
+  [Id('FId', TIdGenerator.Uuid36)]
   TSiteContact = class
   private
     [Column('ID', [TColumnProp.Required], 36)]
@@ -130,6 +146,7 @@ constructor TSite.Create;
 begin
   inherited;
   FSiteContactList.SetInitialValue(TList<TSiteContact>.Create);
+  FState := 'Active';  // Default state as 'Active'
 end;
 
 destructor TSite.Destroy;

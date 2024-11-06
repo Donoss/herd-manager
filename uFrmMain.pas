@@ -8,22 +8,16 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.BaseImageCollection,
   Vcl.ImageCollection, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  AdvTypes, Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset,
-  Aurelius.Engine.ObjectManager, Aurelius.Linq, Aurelius.Comp.Manager,
-  Aurelius.Criteria.Base,
-  Aurelius.Criteria.Linq, Aurelius.Criteria.Projections,
+  Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
+
   System.Generics.Collections,
-  Vcl.Mask, Vcl.DBCtrls;
+  Vcl.Mask, Vcl.DBCtrls, uFrameSite;
 
 type
   TfrmMain = class(TForm)
-    VirtualImageList1: TVirtualImageList;
-    ImageCollection1: TImageCollection;
     BitBtn1: TBitBtn;
     SplitView1: TSplitView;
     btnMovements: TButton;
-    Panel1: TPanel;
     btnTagging: TButton;
     btnDeaths: TButton;
     ComboBox1: TComboBox;
@@ -33,66 +27,21 @@ type
     btnSettings: TButton;
     btnOurSites: TButton;
     btnOtherSites: TButton;
-    SplitView2: TSplitView;
     ComboBox2: TComboBox;
-    DBGrid1: TDBGrid;
-    dsSite: TDataSource;
-    AureliusManager: TAureliusManager;
-    AureliusDatasetSite: TAureliusDataset;
-    Panel3: TPanel;
-    AureliusDatasetSiteId: TStringField;
-    AureliusDatasetSiteSiteType: TStringField;
-    AureliusDatasetSiteName: TStringField;
-    AureliusDatasetSiteAddress: TStringField;
-    AureliusDatasetSitePostcode: TStringField;
-    AureliusDatasetSiteHoldingNumber: TStringField;
-    Panel4: TPanel;
-    AureliusDatasetSiteState: TStringField;
-    AureliusDatasetSiteOperatorName: TStringField;
-    AureliusDatasetSiteOperatorAddress: TStringField;
-    AureliusDatasetSiteOperatorPostcode: TStringField;
-    AureliusDatasetSiteOperatorFlag: TBooleanField;
     Label2: TLabel;
-    DBEdit1: TDBEdit;
-    Label3: TLabel;
-    DBEdit2: TDBEdit;
-    Label4: TLabel;
-    DBEdit3: TDBEdit;
-    BitBtn2: TBitBtn;
-    btnAdd: TButton;
-    btnEdit: TButton;
-    Label5: TLabel;
-    DBEdit4: TDBEdit;
-    Label6: TLabel;
-    DBEdit5: TDBEdit;
-    Label7: TLabel;
-    DBEdit6: TDBEdit;
-    Label8: TLabel;
-    DBEdit7: TDBEdit;
-    Label9: TLabel;
-    DBEdit8: TDBEdit;
-    Label10: TLabel;
-    DBEdit9: TDBEdit;
-    DBGrid2: TDBGrid;
-    Label11: TLabel;
-    Button1: TButton;
-    Button2: TButton;
+    FrameOurSites: TFrameOurSites;
     procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
-    procedure btnEditClick(Sender: TObject);
     procedure btnOurSitesClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
-    procedure DBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Frame11DBGrid1DblClick(Sender: TObject);
     procedure SplitView1Closed(Sender: TObject);
     procedure SplitView1Opened(Sender: TObject);
-    procedure SplitView2Opened(Sender: TObject);
+    procedure PopulateSpecies;
   private
     { Private declarations }
     procedure EnableSpeciesView;
     procedure ArrangeSpeciesButtons;
-    procedure EnableContextView;
   public
     { Public declarations }
   end;
@@ -114,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataManager, uSiteModel;
+uses uDataManager, uSiteModel, uSiteData, uAnimalData;
 
 procedure TfrmMain.ArrangeSpeciesButtons;
 var
@@ -190,41 +139,14 @@ begin
 
 end;
 
-procedure TfrmMain.BitBtn2Click(Sender: TObject);
-begin
-  SplitView2.Close;
-end;
-
-procedure TfrmMain.btnEditClick(Sender: TObject);
-begin
-  SplitView2.Open;
-  if AppContext = cOurSites then
-    AureliusDatasetSite.Edit;
-end;
-
 procedure TfrmMain.btnOurSitesClick(Sender: TObject);
-var
-  LOurSiteList: TObjectList<TSite>;
+
 begin
   AppContext := cOurSites;
-  EnableContextView;
-  Panel1.Caption := AppContext;
-  LOurSiteList := AureliusManager.Find<TSite>
-    .Where(TLinq.Eq('OperatorFlag', True))  // Filter where OperatorFlag is True
-    .OrderBy('Name')                        // Order by Name
-    .List;                                  // Fetch the list
-  try
-    AureliusDatasetSite.SetSourceList(LOurSiteList);
-    AureliusDatasetSite.Open;
-  except
-    LOurSiteList.Free;
-    raise;
-  end;
-end;
+  SiteData.GetOurSitesList;
+  FrameOurSites.Align := alClient;
+  FrameOursites.Visible := true;
 
-procedure TfrmMain.Button2Click(Sender: TObject);
-begin
-   AureliusDatasetSite.Post;
 end;
 
 procedure TfrmMain.ComboBox1Change(Sender: TObject);
@@ -232,39 +154,18 @@ begin
   EnableSpeciesView;
 end;
 
-procedure TfrmMain.DBGrid1DblClick(Sender: TObject);
+procedure TfrmMain.EnableSpeciesView;
 begin
-  SplitView2.Open;
-end;
-
-procedure TfrmMain.EnableContextView;
-begin
-  if AppContext = cDashboard then
+  if (ComboBox1.Text = 'Wildboar') or (ComboBox1.Text = 'Pigs') then
   begin
-    btnAdd.Visible := False;
-    btnEdit.Visible := False;
+    // Pigs and Wildboar
+    btnTagging.Enabled := True;
+    btnDeaths.Enabled := False;
   end
   else
   begin
-    btnAdd.Visible := True;
-    btnEdit.Visible := True;
-  end;
-end;
-
-procedure TfrmMain.EnableSpeciesView;
-begin
-  case ComboBox1.ItemIndex of
-    0, 1, 3, 4, 5, 6, 7:
-      begin // all but pigs
-        btnTagging.Enabled := True;
-        btnDeaths.Enabled := True;
-      end;
-    2:
-      begin // Pigs
-        btnTagging.Enabled := True;
-        btnDeaths.Enabled := False;
-      end;
-
+    btnTagging.Enabled := True;
+    btnDeaths.Enabled := True;
   end;
 
   ArrangeSpeciesButtons;
@@ -273,12 +174,31 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+  PopulateSpecies;
   ArrangeSpeciesButtons;
   SplitView1.Close;
-  SplitView2.Close;
   AppContext := cDashboard;
-  EnableContextView;
 
+end;
+
+procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
+begin
+  FrameOurSites.SplitView2.Open;
+end;
+
+procedure TfrmMain.PopulateSpecies;
+begin
+  ComboBox1.Items.Clear;
+  ComboBox1.Items.Add('All');
+  AnimalData.AureliusDatasetSpecies.First;
+  while not AnimalData.AureliusDatasetSpecies.Eof do
+  begin
+    ComboBox1.Items.Add(AnimalData.AureliusDatasetSpecies.FieldByName('Species')
+      .AsString);
+    AnimalData.AureliusDatasetSpecies.Next;
+  end;
+
+  ComboBox1.ItemIndex := 0; // Select 'All'
 end;
 
 procedure TfrmMain.SplitView1Closed(Sender: TObject);
@@ -333,11 +253,6 @@ begin
     Caption := cSettings;
   Hint := cSettings;
 
-end;
-
-procedure TfrmMain.SplitView2Opened(Sender: TObject);
-begin
-  BitBtn2.Visible := True;
 end;
 
 end.

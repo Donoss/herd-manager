@@ -3,37 +3,52 @@ unit uDataManager;
 interface
 
 uses
-    System.SysUtils
-  , System.Classes
+  System.SysUtils,
+  System.Classes,
+  System.RegularExpressions,
+  System.ImageList,
+  System.StrUtils,
 
-  , Aurelius.Engine.ObjectManager
-  , Aurelius.Linq
-  , Aurelius.Comp.Connection
-  , Aurelius.Comp.Manager
-  , Aurelius.Engine.DatabaseManager
+  Aurelius.Engine.ObjectManager,
 
-  , Data.DB
-
-  , FireDAC.Comp.Client
-  , FireDAC.Stan.Intf
-  , FireDAC.Stan.Option
-  , FireDAC.Stan.Error
-  , FireDAC.UI.Intf
-  , FireDAC.Phys.Intf
-  , FireDAC.Stan.Def
-  , FireDAC.Phys
-  , FireDAC.Stan.Pool
-  , FireDAC.Stan.Async
-  , FireDAC.VCLUI.Wait, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
-  Aurelius.Sql.Firebird, Aurelius.Schema.Firebird, Aurelius.Drivers.FireDac,
-  Aurelius.Comp.DBSchema, Vcl.BaseImageCollection, Vcl.ImageCollection,
-  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  Aurelius.Bind.BaseDataset, Aurelius.Bind.Dataset,
-
+  Aurelius.Comp.Connection,
+  Aurelius.Comp.Manager,
+  Aurelius.Engine.DatabaseManager,
+  Aurelius.Sql.Firebird,
+  Aurelius.Schema.Firebird,
+  Aurelius.Drivers.FireDAC,
+  Aurelius.Comp.DBSchema,
+  Aurelius.Bind.Dataset,
   Aurelius.Criteria.Base,
-  Aurelius.Criteria.Linq, Aurelius.Criteria.Projections
+  Aurelius.Criteria.Linq,
+  Aurelius.Criteria.Projections,
+  Aurelius.Bind.BaseDataset,
 
-  ;
+
+  Data.DB,
+
+  FireDAC.Comp.Client,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Phys,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.VCLUI.Wait,
+  FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef,
+
+  Vcl.BaseImageCollection,
+  Vcl.ImageCollection,
+  Vcl.ImgList,
+  Vcl.VirtualImageList, Aurelius.Linq;
+
+
+
+
 
 type
   TDataManager = class(TDataModule)
@@ -44,32 +59,13 @@ type
     VirtualImageList1: TVirtualImageList;
     ImageCollection1: TImageCollection;
     AureliusManager: TAureliusManager;
-    dsSite: TDataSource;
-    AureliusDatasetSite: TAureliusDataset;
-    AureliusDatasetSiteId: TStringField;
-    AureliusDatasetSiteSiteType: TStringField;
-    AureliusDatasetSiteHoldingNumber: TStringField;
-    AureliusDatasetSiteName: TStringField;
-    AureliusDatasetSiteAddress: TStringField;
-    AureliusDatasetSitePostcode: TStringField;
-    AureliusDatasetSiteState: TStringField;
-    AureliusDatasetSiteOperatorName: TStringField;
-    AureliusDatasetSiteOperatorAddress: TStringField;
-    AureliusDatasetSiteOperatorPostcode: TStringField;
-    dsContact: TDataSource;
-    AureliusDatasetContact: TAureliusDataset;
-    StringField1: TStringField;
-    AureliusDatasetSiteSiteDetailsFlag: TBooleanField;
-    AureliusDatasetSiteOperatorDetailsFlag: TBooleanField;
-    AureliusDatasetSiteOperatorFlag: TBooleanField;
+    VirtualImageList2: TVirtualImageList;
     procedure DataModuleCreate(Sender: TObject);
-    procedure GetOurSitesList;
   private
     { Private declarations }
     procedure UpdateDatabaseSchema;
   public
     { Public declarations }
-     procedure ValidateEntity(Entity: TObject);
   end;
 
 var
@@ -88,13 +84,7 @@ begin
   UpdateDatabaseSchema;
 end;
 
-procedure TDataManager.GetOurSitesList;
-begin
-  AureliusDatasetSite.SetSourceList
-    (DataManager.AureliusManager.Find<TSite>.Where(TLinq.Eq('OperatorFlag',
-    True)).OrderBy('Name').List, True);
-  AureliusDatasetSite.Open;
-end;
+
 
 { TDataManager }
 
@@ -112,18 +102,7 @@ begin
 
 end;
 
-procedure TDataManager.ValidateEntity(Entity: TObject);
-begin
-   try
-    // Use Aurelius' Validate method to validate the entity
-    AureliusManager.ObjManager.Validate(Entity);
-  except
-    on E: Exception do
-    begin
-      // You can centralize error reporting here as well
-      raise Exception.Create('Validation failed: ' + E.Message);
-    end;
-  end;
-end;
+
+
 
 end.

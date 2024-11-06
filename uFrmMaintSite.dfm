@@ -2,24 +2,24 @@ object FrmMaintSite: TFrmMaintSite
   Left = 0
   Top = 0
   Caption = 'Add new Site'
-  ClientHeight = 559
-  ClientWidth = 1262
+  ClientHeight = 688
+  ClientWidth = 1117
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = 'Segoe UI'
+  Font.Name = 'JetBrains Mono'
   Font.Style = []
   Position = poDesktopCenter
-  OnCreate = FormCreate
+  StyleElements = [seFont, seClient]
   OnShow = FormShow
-  TextHeight = 15
+  TextHeight = 16
   object PageControl1: TPageControl
-    Left = 129
-    Top = 0
-    Width = 1133
-    Height = 559
-    ActivePage = TabSheet2
+    Left = 0
+    Top = 41
+    Width = 1117
+    Height = 647
+    ActivePage = TabSheetSite
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -29,113 +29,118 @@ object FrmMaintSite: TFrmMaintSite
     MultiLine = True
     ParentFont = False
     TabOrder = 0
-    object TabSheet1: TTabSheet
-      Caption = 'Site'
-      DesignSize = (
-        1125
-        523)
+    object TabSheetSite: TTabSheet
+      Caption = 'Site '
+      OnShow = TabSheetSiteShow
       object Label12: TLabel
-        Left = 22
-        Top = 279
-        Width = 1093
+        AlignWithMargins = True
+        Left = 12
+        Top = 290
+        Width = 1085
         Height = 147
-        Anchors = [akLeft, akTop, akRight]
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
         Caption = 
-          'Enter details of the site.  '#13#13'The holding number you can obtain ' +
-          'from the Rural Payments Agency (RPA) by calling 0114 280 2205.  ' +
-          #13#13'Enter a user friendly name for the site, this is a name you no' +
-          'rmally use to refer to the site e.g.  Hunshelf Lodge Farm '
+          #13#10'Enter details of the site.  '#13#10#13#10'The holding number you can obt' +
+          'ain from the Rural Payments Agency (RPA) by calling 0114 280 220' +
+          '5.  '#13#10#13#10'Enter a user friendly name for the site, this is a name ' +
+          'you normally use to refer to the site e.g.  Hunshelf Lodge Farm '
         WordWrap = True
+        ExplicitWidth = 1080
       end
-      object Panel2: TPanel
+      object Panel5: TPanel
         Left = 0
-        Top = 473
-        Width = 1125
+        Top = 561
+        Width = 1109
         Height = 50
         Align = alBottom
-        AutoSize = True
         BevelOuter = bvNone
         Caption = 'Panel2'
         ShowCaption = False
-        TabOrder = 0
-        DesignSize = (
-          1125
-          50)
-        object Button1: TButton
-          Left = 835
+        TabOrder = 1
+        object btnSiteCancel: TButton
+          Left = 967
           Top = 0
-          Width = 286
+          Width = 142
           Height = 50
-          Anchors = [akRight, akBottom]
+          Align = alRight
           Cancel = True
-          Caption = 'Cancel and close the window.'
+          Caption = 'Cancel'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 9
+          ImageIndex = 8
           ImageName = 'cancel64'
           Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
-          TabOrder = 0
-          OnClick = Button1Click
+          TabOrder = 2
+          OnClick = btnSiteCancelClick
         end
-        object Button3: TButton
-          Left = 487
+        object btnSiteNext: TButton
+          Left = 0
           Top = 0
           Width = 342
           Height = 50
-          Anchors = [akRight, akBottom]
-          Caption = 'Continue to enter Keeper details or'
+          Align = alLeft
+          Caption = 'Continue to enter Keeper details'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 16
+          ImageAlignment = iaRight
+          ImageIndex = 15
           ImageName = 'next64'
           Images = DataManager.VirtualImageList1
           ParentFont = False
-          TabOrder = 1
-          OnClick = Button3Click
+          TabOrder = 0
+          OnClick = btnSiteNextClick
         end
-        object Button9: TButton
-          Left = 274
+        object btnSiteSave: TButton
+          Left = 825
           Top = 0
-          Width = 207
+          Width = 142
           Height = 50
-          Anchors = [akRight, akBottom]
-          Caption = 'Save and close or '
+          Align = alRight
+          Caption = 'Save'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 7
+          ImageIndex = 6
           ImageName = 'save64'
           Images = DataManager.VirtualImageList1
-          ModalResult = 2
           ParentFont = False
-          TabOrder = 2
-          OnClick = Button9Click
+          TabOrder = 1
+          OnClick = btnSiteSaveClick
         end
       end
       object GroupBox1: TGroupBox
-        Left = 22
-        Top = 3
-        Width = 1088
+        AlignWithMargins = True
+        Left = 12
+        Top = 12
+        Width = 1085
         Height = 254
-        Anchors = [akLeft, akTop, akRight]
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
         Caption = 'Site'
-        TabOrder = 1
+        TabOrder = 0
         object Label5: TLabel
           Left = 17
           Top = 33
-          Width = 90
+          Width = 40
           Height = 21
-          Caption = 'Site Type'
+          Caption = 'Type'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -207,8 +212,9 @@ object FrmMaintSite: TFrmMaintSite
           Width = 340
           Height = 29
           DataField = 'Identifier'
-          DataSource = DataManager.dsSite
-          TabOrder = 0
+          DataSource = SiteData.dsSite
+          TabOrder = 1
+          OnExit = DBEdit5Exit
         end
         object DBEdit6: TDBEdit
           Left = 176
@@ -216,8 +222,9 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'Name'
-          DataSource = DataManager.dsSite
-          TabOrder = 1
+          DataSource = SiteData.dsSite
+          TabOrder = 2
+          OnExit = DBEdit6Exit
         end
         object DBEdit7: TDBEdit
           Left = 176
@@ -225,8 +232,9 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'Address'
-          DataSource = DataManager.dsSite
-          TabOrder = 2
+          DataSource = SiteData.dsSite
+          TabOrder = 3
+          OnExit = DBEdit7Exit
         end
         object DBEdit8: TDBEdit
           Left = 176
@@ -234,18 +242,20 @@ object FrmMaintSite: TFrmMaintSite
           Width = 97
           Height = 29
           DataField = 'Postcode'
-          DataSource = DataManager.dsSite
-          TabOrder = 3
+          DataSource = SiteData.dsSite
+          TabOrder = 4
+          OnExit = DBEdit8Exit
         end
         object DBEdit9: TDBEdit
           Left = 176
           Top = 206
           Width = 97
           Height = 29
+          TabStop = False
           DataField = 'State'
-          DataSource = DataManager.dsSite
+          DataSource = SiteData.dsSite
           ReadOnly = True
-          TabOrder = 4
+          TabOrder = 5
         end
         object DBComboBox1: TDBComboBox
           Left = 176
@@ -254,7 +264,7 @@ object FrmMaintSite: TFrmMaintSite
           Height = 29
           Style = csDropDownList
           DataField = 'SiteType'
-          DataSource = DataManager.dsSite
+          DataSource = SiteData.dsSite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -268,7 +278,7 @@ object FrmMaintSite: TFrmMaintSite
             'Market'
             'Performance Location')
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 0
         end
       end
     end
@@ -281,124 +291,136 @@ object FrmMaintSite: TFrmMaintSite
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      DesignSize = (
-        1125
-        523)
       object Label11: TLabel
-        Left = 15
-        Top = 176
-        Width = 1093
+        AlignWithMargins = True
+        Left = 12
+        Top = 189
+        Width = 1085
         Height = 126
-        Anchors = [akLeft, akTop, akRight]
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
         Caption = 
-          'Enter the details of the registered Livestock Keeper as notified' +
-          ' to Animal and Plant Health Agency (APHA).'#13#13'If you need to conta' +
-          'ct the APHA the contact details are:'#13'1.  Livestock Registration ' +
-          '0114 280 3003'#13'2.  Desease notification 0114 280 8776'
+          #13#10'Enter the details of the registered Livestock Keeper as notifi' +
+          'ed to Animal and Plant Health Agency (APHA).'#13#10#13#10'If you need to c' +
+          'ontact the APHA the contact details are:'#13#10'1.  Livestock Registra' +
+          'tion 0114 280 3003'#13#10'2.  Disease notification 0114 280 8776'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'JetBrains Mono'
+        Font.Style = []
+        ParentFont = False
         WordWrap = True
+        ExplicitWidth = 1060
       end
-      object Panel3: TPanel
+      object Panel6: TPanel
         Left = 0
-        Top = 473
-        Width = 1125
+        Top = 561
+        Width = 1109
         Height = 50
         Align = alBottom
         AutoSize = True
         BevelOuter = bvNone
         Caption = 'Panel2'
         ShowCaption = False
-        TabOrder = 0
-        DesignSize = (
-          1125
-          50)
-        object Button8: TButton
-          Left = 3
+        TabOrder = 1
+        object btnKeeperPrevious: TButton
+          Left = 0
           Top = 0
           Width = 263
           Height = 50
-          Anchors = [akRight, akBottom]
-          Caption = 'Return to Site details or '
+          Align = alLeft
+          Caption = 'Return to Site details'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 15
+          ImageIndex = 14
           ImageName = 'previous64'
           Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 0
-          OnClick = Button8Click
+          OnClick = btnKeeperPreviousClick
         end
-        object Button5: TButton
-          Left = 272
+        object btnKeeperSave: TButton
+          Left = 825
           Top = 0
-          Width = 207
+          Width = 142
           Height = 50
-          Anchors = [akRight, akBottom]
-          Caption = 'Save and close or '
+          Align = alRight
+          Caption = 'Save'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 7
+          ImageIndex = 6
           ImageName = 'save64'
           Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
-          TabOrder = 1
-          OnClick = Button5Click
+          TabOrder = 2
+          OnClick = btnKeeperSaveClick
         end
-        object Button6: TButton
-          Left = 485
+        object btnKeeperNext: TButton
+          Left = 263
           Top = 0
           Width = 342
           Height = 50
-          Anchors = [akRight, akBottom]
-          Caption = 'Continue to enter Contact details or'
+          Align = alLeft
+          Caption = 'Continue to enter Mark details'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 16
+          ImageAlignment = iaRight
+          ImageIndex = 15
           ImageName = 'next64'
           Images = DataManager.VirtualImageList1
           ParentFont = False
-          TabOrder = 2
-          OnClick = Button6Click
+          TabOrder = 1
+          OnClick = btnKeeperNextClick
         end
-        object Button7: TButton
-          Left = 833
+        object btnKeeperCancel: TButton
+          Left = 967
           Top = 0
-          Width = 286
+          Width = 142
           Height = 50
-          Anchors = [akRight, akBottom]
+          Align = alRight
           Cancel = True
-          Caption = 'Cancel and close the window.'
+          Caption = 'Cancel'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'JetBrains Mono'
           Font.Style = []
-          ImageIndex = 9
+          ImageIndex = 8
           ImageName = 'cancel64'
           Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 3
-          OnClick = Button7Click
+          OnClick = btnKeeperCancelClick
         end
       end
       object GroupBox2: TGroupBox
-        Left = 15
-        Top = 3
-        Width = 1096
+        AlignWithMargins = True
+        Left = 12
+        Top = 12
+        Width = 1085
         Height = 153
-        Anchors = [akLeft, akTop, akRight]
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
         Caption = 'Keeper'
-        TabOrder = 1
+        TabOrder = 0
         object Label2: TLabel
           Left = 17
           Top = 37
@@ -429,7 +451,7 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'OperatorName'
-          DataSource = DataManager.dsSite
+          DataSource = SiteData.dsSite
           TabOrder = 0
         end
         object DBEdit2: TDBEdit
@@ -438,7 +460,7 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'OperatorAddress'
-          DataSource = DataManager.dsSite
+          DataSource = SiteData.dsSite
           TabOrder = 1
         end
         object DBEdit3: TDBEdit
@@ -447,8 +469,193 @@ object FrmMaintSite: TFrmMaintSite
           Width = 97
           Height = 29
           DataField = 'OperatorPostcode'
-          DataSource = DataManager.dsSite
+          DataSource = SiteData.dsSite
           TabOrder = 2
+        end
+      end
+    end
+    object TabSheetMarks: TTabSheet
+      Margins.Left = 12
+      Margins.Top = 12
+      Margins.Right = 12
+      Margins.Bottom = 12
+      Caption = 'Marks'
+      ImageIndex = -1
+      object Label13: TLabel
+        AlignWithMargins = True
+        Left = 12
+        Top = 362
+        Width = 1085
+        Height = 21
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
+        Caption = 
+          'Your registed Herd and Flock Marks.  You can add, amend or remov' +
+          'e a mark using the buttons in the header.'
+        WordWrap = True
+        ExplicitWidth = 1050
+      end
+      object DBGrid1: TDBGrid
+        AlignWithMargins = True
+        Left = 12
+        Top = 69
+        Width = 1085
+        Height = 269
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
+        Align = alTop
+        DataSource = SiteData.dsSiteMark
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'JetBrains Mono'
+        TitleFont.Style = []
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 561
+        Width = 1109
+        Height = 50
+        Align = alBottom
+        AutoSize = True
+        BevelOuter = bvNone
+        Caption = 'Panel2'
+        ShowCaption = False
+        TabOrder = 1
+        object Button1: TButton
+          Left = 0
+          Top = 0
+          Width = 263
+          Height = 50
+          Align = alLeft
+          Caption = ' Return to Keeper details'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageIndex = 14
+          ImageName = 'previous64'
+          Images = DataManager.VirtualImageList1
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnKeeperPreviousClick
+        end
+        object Button2: TButton
+          Left = 825
+          Top = 0
+          Width = 142
+          Height = 50
+          Align = alRight
+          Caption = 'Save'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageIndex = 6
+          ImageName = 'save64'
+          Images = DataManager.VirtualImageList1
+          ModalResult = 2
+          ParentFont = False
+          TabOrder = 2
+          OnClick = btnKeeperSaveClick
+        end
+        object Button3: TButton
+          Left = 263
+          Top = 0
+          Width = 342
+          Height = 50
+          Align = alLeft
+          Caption = 'Continue to enter Contact details'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageAlignment = iaRight
+          ImageIndex = 15
+          ImageName = 'next64'
+          Images = DataManager.VirtualImageList1
+          ParentFont = False
+          TabOrder = 1
+          OnClick = btnKeeperNextClick
+        end
+        object Button4: TButton
+          Left = 967
+          Top = 0
+          Width = 142
+          Height = 50
+          Align = alRight
+          Cancel = True
+          Caption = 'Cancel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageIndex = 8
+          ImageName = 'cancel64'
+          Images = DataManager.VirtualImageList1
+          ModalResult = 2
+          ParentFont = False
+          TabOrder = 3
+          OnClick = btnKeeperCancelClick
+        end
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 1109
+        Height = 57
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvLowered
+        Caption = 'Registered Marks'
+        TabOrder = 2
+        object btnEdit: TButton
+          Left = 1008
+          Top = 1
+          Width = 50
+          Height = 55
+          Align = alRight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageAlignment = iaCenter
+          ImageIndex = 10
+          ImageName = 'edit64'
+          Images = DataManager.VirtualImageList2
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnEditClick
+        end
+        object btnAdd: TButton
+          Left = 1058
+          Top = 1
+          Width = 50
+          Height = 55
+          Align = alRight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'JetBrains Mono'
+          Font.Style = []
+          ImageAlignment = iaCenter
+          ImageIndex = 9
+          ImageName = 'add64'
+          Images = DataManager.VirtualImageList2
+          ParentFont = False
+          TabOrder = 1
+          OnClick = btnAddClick
         end
       end
     end
@@ -456,13 +663,18 @@ object FrmMaintSite: TFrmMaintSite
       Caption = 'Contacts'
       ImageIndex = 2
       DesignSize = (
-        1125
-        523)
+        1109
+        611)
       object Label1: TLabel
+        AlignWithMargins = True
         Left = 6
         Top = 251
-        Width = 1073
+        Width = 970
         Height = 84
+        Margins.Left = 12
+        Margins.Top = 12
+        Margins.Right = 12
+        Margins.Bottom = 12
         Anchors = [akLeft, akTop, akRight]
         Caption = 
           'Enter the details of any persons associated with the site who ma' +
@@ -470,10 +682,10 @@ object FrmMaintSite: TFrmMaintSite
           'contact preferences here.'
         WordWrap = True
       end
-      object Panel4: TPanel
+      object Panel7: TPanel
         Left = 0
-        Top = 473
-        Width = 1125
+        Top = 561
+        Width = 1109
         Height = 50
         Align = alBottom
         AutoSize = True
@@ -487,60 +699,23 @@ object FrmMaintSite: TFrmMaintSite
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 129
-    Height = 559
-    Align = alLeft
-    BevelOuter = bvNone
-    Caption = 'Panel1'
-    ShowCaption = False
+    Width = 1117
+    Height = 41
+    Align = alTop
+    Alignment = taLeftJustify
+    Caption = '  Panel1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'JetBrains Mono'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
-    object DBCheckBox1: TDBCheckBox
-      Left = 0
-      Top = 8
-      Width = 97
-      Height = 17
-      Caption = 'Site'
-      DataField = 'SiteDetailsFlag'
-      DataSource = DataManager.dsSite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'JetBrains Mono'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-    end
-    object DBCheckBox2: TDBCheckBox
-      Left = 0
-      Top = 31
-      Width = 97
-      Height = 17
-      Caption = 'Keeper'
-      DataField = 'OperatorDetailsFlag'
-      DataSource = DataManager.dsSite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'JetBrains Mono'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-    end
-    object DBCheckBox3: TDBCheckBox
-      Left = 0
-      Top = 54
-      Width = 97
-      Height = 17
-      Caption = 'Contacts'
-      DataField = 'OperatorDetailsFlag'
-      DataSource = DataManager.dsSite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'JetBrains Mono'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-    end
+  end
+  object DataSource1: TDataSource
+    DataSet = SiteData.AureliusDatasetSite
+    OnDataChange = DataSource1DataChange
+    Left = 604
+    Top = 521
   end
 end

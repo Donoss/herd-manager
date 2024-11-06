@@ -8,10 +8,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.BaseImageCollection,
   Vcl.ImageCollection, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
-  AdvTypes, Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  
+  Vcl.Buttons, Vcl.WinXPanels, Data.DB, Vcl.Grids, Vcl.DBGrids,
+
   System.Generics.Collections,
-  Vcl.Mask, Vcl.DBCtrls, uFrameSite, Vcl.Menus, AdvMenus;
+  Vcl.Mask, Vcl.DBCtrls, uFrameSite;
 
 type
   TfrmMain = class(TForm)
@@ -28,16 +28,16 @@ type
     btnOurSites: TButton;
     btnOtherSites: TButton;
     ComboBox2: TComboBox;
+    Label2: TLabel;
     FrameOurSites: TFrameOurSites;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnOurSitesClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Frame11DBGrid1DblClick(Sender: TObject);
-    procedure FrameOurSitesbtnAddClick(Sender: TObject);
-    procedure FrameOurSitesbtnCloseSplit2Click(Sender: TObject);
     procedure SplitView1Closed(Sender: TObject);
     procedure SplitView1Opened(Sender: TObject);
+    procedure PopulateSpecies;
   private
     { Private declarations }
     procedure EnableSpeciesView;
@@ -63,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataManager, uSiteModel;
+uses uDataManager, uSiteModel, uSiteData, uAnimalData;
 
 procedure TfrmMain.ArrangeSpeciesButtons;
 var
@@ -143,7 +143,9 @@ procedure TfrmMain.btnOurSitesClick(Sender: TObject);
 
 begin
   AppContext := cOurSites;
-  DataManager.GetOurSitesList;
+  SiteData.GetOurSitesList;
+  FrameOurSites.Align := alClient;
+  FrameOursites.Visible := true;
 
 end;
 
@@ -154,18 +156,16 @@ end;
 
 procedure TfrmMain.EnableSpeciesView;
 begin
-  case ComboBox1.ItemIndex of
-    0, 1, 3, 4, 5, 6, 7:
-      begin // all but pigs
-        btnTagging.Enabled := True;
-        btnDeaths.Enabled := True;
-      end;
-    2:
-      begin // Pigs
-        btnTagging.Enabled := True;
-        btnDeaths.Enabled := False;
-      end;
-
+  if (ComboBox1.Text = 'Wildboar') or (ComboBox1.Text = 'Pigs') then
+  begin
+    // Pigs and Wildboar
+    btnTagging.Enabled := True;
+    btnDeaths.Enabled := False;
+  end
+  else
+  begin
+    btnTagging.Enabled := True;
+    btnDeaths.Enabled := True;
   end;
 
   ArrangeSpeciesButtons;
@@ -174,9 +174,11 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+  PopulateSpecies;
   ArrangeSpeciesButtons;
   SplitView1.Close;
   AppContext := cDashboard;
+
 end;
 
 procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
@@ -184,16 +186,19 @@ begin
   FrameOurSites.SplitView2.Open;
 end;
 
-procedure TfrmMain.FrameOurSitesbtnAddClick(Sender: TObject);
+procedure TfrmMain.PopulateSpecies;
 begin
-  FrameOurSites.btnAddClick(Sender);
+  ComboBox1.Items.Clear;
+  ComboBox1.Items.Add('All');
+  AnimalData.AureliusDatasetSpecies.First;
+  while not AnimalData.AureliusDatasetSpecies.Eof do
+  begin
+    ComboBox1.Items.Add(AnimalData.AureliusDatasetSpecies.FieldByName('Species')
+      .AsString);
+    AnimalData.AureliusDatasetSpecies.Next;
+  end;
 
-end;
-
-procedure TfrmMain.FrameOurSitesbtnCloseSplit2Click(Sender: TObject);
-begin
-  FrameOurSites.btnCloseSplit2Click(Sender);
-
+  ComboBox1.ItemIndex := 0; // Select 'All'
 end;
 
 procedure TfrmMain.SplitView1Closed(Sender: TObject);

@@ -76,7 +76,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 8
           ImageName = 'cancel64'
-          Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 2
@@ -97,7 +96,6 @@ object FrmMaintSite: TFrmMaintSite
           ImageAlignment = iaRight
           ImageIndex = 15
           ImageName = 'next64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 0
           OnClick = btnSiteNextClick
@@ -116,7 +114,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 6
           ImageName = 'save64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 1
           OnClick = btnSiteSaveClick
@@ -212,7 +209,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 340
           Height = 29
           DataField = 'Identifier'
-          DataSource = SiteData.dsSite
           TabOrder = 1
           OnExit = DBEdit5Exit
         end
@@ -222,7 +218,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'Name'
-          DataSource = SiteData.dsSite
           TabOrder = 2
           OnExit = DBEdit6Exit
         end
@@ -232,7 +227,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'Address'
-          DataSource = SiteData.dsSite
           TabOrder = 3
           OnExit = DBEdit7Exit
         end
@@ -242,7 +236,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 97
           Height = 29
           DataField = 'Postcode'
-          DataSource = SiteData.dsSite
           TabOrder = 4
           OnExit = DBEdit8Exit
         end
@@ -253,7 +246,6 @@ object FrmMaintSite: TFrmMaintSite
           Height = 29
           TabStop = False
           DataField = 'State'
-          DataSource = SiteData.dsSite
           ReadOnly = True
           TabOrder = 5
         end
@@ -264,7 +256,6 @@ object FrmMaintSite: TFrmMaintSite
           Height = 29
           Style = csDropDownList
           DataField = 'SiteType'
-          DataSource = SiteData.dsSite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -295,7 +286,7 @@ object FrmMaintSite: TFrmMaintSite
         AlignWithMargins = True
         Left = 12
         Top = 189
-        Width = 1085
+        Width = 1060
         Height = 126
         Margins.Left = 12
         Margins.Top = 12
@@ -314,7 +305,6 @@ object FrmMaintSite: TFrmMaintSite
         Font.Style = []
         ParentFont = False
         WordWrap = True
-        ExplicitWidth = 1060
       end
       object Panel6: TPanel
         Left = 0
@@ -341,7 +331,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 14
           ImageName = 'previous64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 0
           OnClick = btnKeeperPreviousClick
@@ -360,7 +349,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 6
           ImageName = 'save64'
-          Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 2
@@ -381,7 +369,6 @@ object FrmMaintSite: TFrmMaintSite
           ImageAlignment = iaRight
           ImageIndex = 15
           ImageName = 'next64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 1
           OnClick = btnKeeperNextClick
@@ -401,7 +388,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 8
           ImageName = 'cancel64'
-          Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 3
@@ -451,7 +437,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'OperatorName'
-          DataSource = SiteData.dsSite
           TabOrder = 0
         end
         object DBEdit2: TDBEdit
@@ -460,7 +445,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 409
           Height = 29
           DataField = 'OperatorAddress'
-          DataSource = SiteData.dsSite
           TabOrder = 1
         end
         object DBEdit3: TDBEdit
@@ -469,7 +453,6 @@ object FrmMaintSite: TFrmMaintSite
           Width = 97
           Height = 29
           DataField = 'OperatorPostcode'
-          DataSource = SiteData.dsSite
           TabOrder = 2
         end
       end
@@ -485,7 +468,7 @@ object FrmMaintSite: TFrmMaintSite
         AlignWithMargins = True
         Left = 12
         Top = 362
-        Width = 1085
+        Width = 1050
         Height = 21
         Margins.Left = 12
         Margins.Top = 12
@@ -496,7 +479,6 @@ object FrmMaintSite: TFrmMaintSite
           'Your registed Herd and Flock Marks.  You can add, amend or remov' +
           'e a mark using the buttons in the header.'
         WordWrap = True
-        ExplicitWidth = 1050
       end
       object DBGrid1: TDBGrid
         AlignWithMargins = True
@@ -509,7 +491,6 @@ object FrmMaintSite: TFrmMaintSite
         Margins.Right = 12
         Margins.Bottom = 12
         Align = alTop
-        DataSource = SiteData.dsSiteMark
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -542,7 +523,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 14
           ImageName = 'previous64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 0
           OnClick = btnKeeperPreviousClick
@@ -561,7 +541,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 6
           ImageName = 'save64'
-          Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 2
@@ -582,7 +561,6 @@ object FrmMaintSite: TFrmMaintSite
           ImageAlignment = iaRight
           ImageIndex = 15
           ImageName = 'next64'
-          Images = DataManager.VirtualImageList1
           ParentFont = False
           TabOrder = 1
           OnClick = btnKeeperNextClick
@@ -602,7 +580,6 @@ object FrmMaintSite: TFrmMaintSite
           Font.Style = []
           ImageIndex = 8
           ImageName = 'cancel64'
-          Images = DataManager.VirtualImageList1
           ModalResult = 2
           ParentFont = False
           TabOrder = 3
@@ -633,7 +610,6 @@ object FrmMaintSite: TFrmMaintSite
           ImageAlignment = iaCenter
           ImageIndex = 10
           ImageName = 'edit64'
-          Images = DataManager.VirtualImageList2
           ParentFont = False
           TabOrder = 0
           OnClick = btnEditClick
@@ -652,7 +628,6 @@ object FrmMaintSite: TFrmMaintSite
           ImageAlignment = iaCenter
           ImageIndex = 9
           ImageName = 'add64'
-          Images = DataManager.VirtualImageList2
           ParentFont = False
           TabOrder = 1
           OnClick = btnAddClick
@@ -713,7 +688,6 @@ object FrmMaintSite: TFrmMaintSite
     TabOrder = 1
   end
   object DataSource1: TDataSource
-    DataSet = SiteData.AureliusDatasetSite
     OnDataChange = DataSource1DataChange
     Left = 604
     Top = 521

@@ -9,7 +9,7 @@ object frmMain: TfrmMain
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
-  Font.Name = 'JetBrains Mono'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
   RoundedCorners = rcOn
@@ -44,7 +44,7 @@ object frmMain: TfrmMain
       Caption = 'Our Sites'
       ImageIndex = 2
       ImageName = 'holding64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -59,7 +59,7 @@ object frmMain: TfrmMain
       Caption = 'Movements'
       ImageIndex = 3
       ImageName = 'move64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
@@ -73,7 +73,7 @@ object frmMain: TfrmMain
       Caption = 'Tagging'
       ImageIndex = 5
       ImageName = 'tag64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
@@ -87,7 +87,7 @@ object frmMain: TfrmMain
       Caption = 'Deaths'
       ImageIndex = 1
       ImageName = 'deceased64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
@@ -102,7 +102,7 @@ object frmMain: TfrmMain
       Default = True
       ImageIndex = 0
       ImageName = 'dashboard64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -118,7 +118,7 @@ object frmMain: TfrmMain
       Caption = 'Settings'
       ImageIndex = 4
       ImageName = 'settings64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 6
@@ -132,7 +132,7 @@ object frmMain: TfrmMain
       Caption = 'Other Sites'
       ImageIndex = 13
       ImageName = 'otherSites64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       ParentShowHint = False
       ShowHint = True
       TabOrder = 5
@@ -149,26 +149,19 @@ object frmMain: TfrmMain
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 1
-    DesignSize = (
-      1697
-      49)
     object Label1: TLabel
-      Left = 1034
-      Top = 11
-      Width = 40
+      Left = 934
+      Top = 10
+      Width = 26
       Height = 21
-      Anchors = [akTop, akRight]
       Caption = 'Site'
-      ExplicitLeft = 1398
     end
     object Label2: TLabel
-      Left = 1464
-      Top = 11
-      Width = 70
+      Left = 1438
+      Top = 10
+      Width = 52
       Height = 21
-      Anchors = [akTop, akRight]
       Caption = 'Species'
-      ExplicitLeft = 1653
     end
     object BitBtn1: TBitBtn
       Left = 3
@@ -179,34 +172,20 @@ object frmMain: TfrmMain
       Default = True
       ImageIndex = 19
       ImageName = 'menu_64'
-      Images = DataManager.VirtualImageList1
+      Images = Images.VirtualImageListHeight48
       TabOrder = 0
       StyleName = 'Calypso'
       OnClick = BitBtn1Click
     end
-    object ComboBox1: TComboBox
-      Left = 1547
-      Top = 9
-      Width = 147
-      Height = 29
-      Align = alCustom
-      AutoDropDown = True
-      Style = csDropDownList
-      Anchors = [akTop, akRight]
-      TabOrder = 1
-      OnChange = ComboBox1Change
-    end
     object ComboBox2: TComboBox
-      Left = 1088
-      Top = 8
+      Left = 992
+      Top = 7
       Width = 360
       Height = 29
-      Align = alCustom
       AutoDropDown = True
       Style = csDropDownList
-      Anchors = [akTop, akRight]
       ItemIndex = 0
-      TabOrder = 2
+      TabOrder = 1
       Text = 'All'
       OnChange = ComboBox1Change
       Items.Strings = (
@@ -215,8 +194,19 @@ object frmMain: TfrmMain
         'Underbank Farm'
         'Langsett Farm')
     end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 1521
+      Top = 7
+      Width = 176
+      Height = 29
+      DataField = 'SPECIES'
+      DataSource = AnimalData.dsSpecies
+      ListField = 'SPECIES'
+      ListSource = AnimalData.dsSpecies
+      TabOrder = 2
+    end
   end
-  inline FrameOurSites: TFrameOurSites
+  inline FrameSites: TFrameSites
     Left = 60
     Top = 49
     Width = 1637
@@ -228,85 +218,33 @@ object frmMain: TfrmMain
     ExplicitTop = 49
     ExplicitWidth = 1637
     ExplicitHeight = 991
-    inherited Panel3: TPanel
-      Width = 437
-      Height = 991
-      ExplicitWidth = 437
-      ExplicitHeight = 991
+    inherited GroupBox3: TGroupBox
+      Width = 1387
+      Height = 937
+      ExplicitWidth = 1387
+      ExplicitHeight = 937
       inherited DBGrid1: TDBGrid
-        Width = 435
-        Height = 932
+        Width = 183
+        Height = 912
       end
-      inherited Panel2: TPanel
-        Width = 435
-        ExplicitWidth = 435
-        inherited btnCloseView: TButton
-          Left = 383
-          ExplicitLeft = 383
-        end
+      inherited SplitView2: TSplitView
+        Left = 185
+        Height = 912
+        ExplicitLeft = 185
+        ExplicitHeight = 912
       end
     end
-    inherited SplitView2: TSplitView
-      Left = 437
-      Height = 991
-      ExplicitLeft = 437
-      ExplicitHeight = 991
-      inherited Panel4: TPanel
-        Height = 934
-        ExplicitHeight = 934
+    inherited SplitView1: TSplitView
+      Height = 937
+      ExplicitHeight = 937
+      inherited GroupBox2: TGroupBox
+        Height = 913
+        ExplicitHeight = 913
       end
-      inherited Panel5: TPanel
-        Height = 934
-        ExplicitHeight = 934
-        inherited GroupBox1: TGroupBox
-          inherited DBText1: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText2: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText3: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText4: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText5: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText6: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-        end
-        inherited GroupBox3: TGroupBox
-          Height = 259
-          ExplicitHeight = 259
-        end
-        inherited GroupBox2: TGroupBox
-          inherited Label3: TLabel
-            Top = 72
-            ExplicitTop = 72
-          end
-          inherited DBText7: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText8: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-          inherited DBText9: TDBText
-            Height = 21
-            ExplicitHeight = 21
-          end
-        end
-      end
+    end
+    inherited ToolBar3: TToolBar
+      Width = 1637
+      ExplicitWidth = 1637
     end
   end
 end

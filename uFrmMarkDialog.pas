@@ -46,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataManager, uSiteModel, uSiteData, uDataUtils, uAnimalData;
+uses uSiteModel, uSiteData, uDataUtils, uAnimalData;
 
 
 procedure TFrmMarkDialog.btnCancelClick(Sender: TObject);
@@ -61,10 +61,10 @@ end;
 
 procedure TFrmMarkDialog.CancelAndClose;
 begin
-  if SiteData.AureliusDatasetSiteMark.State in [dsEdit, dsInsert] then
+ { if SiteData.AureliusDatasetSiteMark.State in [dsEdit, dsInsert] then
     SiteData.AureliusDatasetSiteMark.Cancel;
 
-  ModalResult := mrCancel; // Sets the result for modal forms
+  ModalResult := mrCancel; // Sets the result for modal forms     }
 end;
 
 procedure TFrmMarkDialog.DBEdit5Exit(Sender: TObject);
@@ -95,7 +95,7 @@ var
   Error: IValidationError;
   ValidationMessages: string;
 begin
-  SiteMarkEntity := SiteData.AureliusDatasetSiteMark.Current<TSiteMark>;
+ { SiteMarkEntity := SiteData.AureliusDatasetSiteMark.Current<TSiteMark>;
 
   try
     SiteData.AureliusDatasetSiteMark.Post;
@@ -128,14 +128,14 @@ begin
     end;
   end;
 
-  ModalResult := mrClose; // Sets the result for modal forms
+  ModalResult := mrClose; // Sets the result for modal forms      }
 
 end;
 
 procedure TFrmMarkDialog.SetEditMode(AEditMode: TEditMode);
 begin
   FEditMode := AEditMode;
-  case FEditMode of
+  {case FEditMode of
     emAdd:
       begin
         Caption := 'Add New Mark';
@@ -153,7 +153,7 @@ begin
         Caption := 'Edit Mark';
         SiteData.dsSiteMark.Dataset.Edit;
       end;
-  end;
+  end;                    }
 end;
 
 

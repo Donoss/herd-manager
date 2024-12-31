@@ -4,19 +4,20 @@ program HerdManager;
 
 uses
   Vcl.Forms,
-  uFrmMain in 'uFrmMain.pas' {frmMain},
   Vcl.Themes,
   Vcl.Styles,
-  uDataManager in 'database\uDataManager.pas' {DataManager: TDataModule},
-  uSiteModel in 'database\uSiteModel.pas',
-  uFrameSite in 'uFrameSite.pas' {FrameOurSites: TFrame},
-  uFrmMaintSite in 'uFrmMaintSite.pas' {FrmMaintSite},
-  uAppTypes in 'uAppTypes.pas',
-  uSiteData in 'database\uSiteData.pas' {SiteData: TDataModule},
   uDataUtils in 'database\uDataUtils.pas',
-  uAnimalModel in 'database\uAnimalModel.pas',
-  uAnimalData in 'database\uAnimalData.pas' {AnimalData: TDataModule},
-  uFrmMarkDialog in 'uFrmMarkDialog.pas' {FrmMarkDialog};
+  uAppTypes in 'uAppTypes.pas',
+  uFrameSite in 'uFrameSite.pas' {FrameSites: TFrame},
+  uFrmMain in 'uFrmMain.pas' {frmMain},
+  uSiteData in 'database\site\uSiteData.pas' {SiteData: TDataModule},
+  uSiteModel in 'database\site\uSiteModel.pas',
+  uImages in 'resources\uImages.pas' {Images: TDataModule},
+  uAnimalData in 'database\animal\uAnimalData.pas' {AnimalData: TDataModule},
+  uAnimalModel in 'database\animal\uAnimalModel.pas',
+  uUtilities in 'utilities\uUtilities.pas',
+  Unit1 in 'Unit1.pas' {Form1},
+  Unit3 in 'Unit3.pas' {TMSForm3};
 
 {$R *.res}
 
@@ -24,11 +25,8 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Material Oxford Blue');
-  Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TDataManager, DataManager);
+  Application.CreateForm(TImages, Images);
   Application.CreateForm(TSiteData, SiteData);
-  Application.CreateForm(TAnimalData, AnimalData);
-  Application.CreateForm(TFrmMaintSite, FrmMaintSite);
-  Application.CreateForm(TFrmMarkDialog, FrmMarkDialog);
+  Application.CreateForm(TTMSForm3, TMSForm3);
   Application.Run;
 end.

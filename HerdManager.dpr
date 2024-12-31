@@ -16,17 +16,16 @@ uses
   uAnimalData in 'database\animal\uAnimalData.pas' {AnimalData: TDataModule},
   uAnimalModel in 'database\animal\uAnimalModel.pas',
   uUtilities in 'utilities\uUtilities.pas',
-  Unit1 in 'Unit1.pas' {Form1},
-  Unit3 in 'Unit3.pas' {TMSForm3};
+  uFrmMain2 in 'uFrmMain2.pas' {Form2},
+  HerdManager.dxSettings in 'HerdManager.dxSettings.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Material Oxford Blue');
   Application.CreateForm(TImages, Images);
   Application.CreateForm(TSiteData, SiteData);
-  Application.CreateForm(TTMSForm3, TMSForm3);
+  Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

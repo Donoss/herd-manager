@@ -3,123 +3,120 @@ unit uSiteModel;
 interface
 
 uses
-  SysUtils, 
-  Generics.Collections, 
-  Aurelius.Mapping.Attributes, 
-  Aurelius.Types.Blob, 
-  Aurelius.Types.DynamicProperties, 
-  Aurelius.Types.Nullable, 
-  Aurelius.Types.Proxy;
+  SysUtils,
+  Generics.Collections,
+  Aurelius.Mapping.Attributes,
+  Aurelius.Types.Blob,
+  Aurelius.Types.DynamicProperties,
+  Aurelius.Types.Nullable,
+  Aurelius.Types.Proxy,
+  Aurelius.Validation.Attributes,
+  uAnimalModel;  // Import TSpecies from uAnimalModel
 
 type
   TSite = class;
   TSiteContact = class;
   TSiteMark = class;
-  TSiteSpecy = class;
-  TSpecies = class;
-  
+
   [Entity]
   [Table('SITE')]
-  [Description('')]
-  [Id('FId', TIdGenerator.None)]
+  [Id('FId', TIdGenerator.Uuid36)]
   TSite = class
   private
-    [Column('ID', [TColumnProp.Required], 36)]
-    [Description('Internal unique id')]
+    [Column('ID', [TColumnProp.Required, TColumnProp.NoUpdate], 36)]
     FId: string;
-    
+
     [Column('SITE_TYPE', [TColumnProp.Required], 50)]
-    [Description('The type of site livestock can be moved off or moved onto e.g. Farm, Abattoir, Market etc.')]
-    FSitetype: string;
-    
-    [Column('IDENTIFIER', [TColumnProp.Required], 11)]
-    [Description('If the site is an agricultural holding the Country Parish Holding Number.')]
+    [Required]
+    FSiteType: string;
+
+    [Column('IDENTIFIER', [TColumnProp.Required], 50)]
+    [Required]
     FIdentifier: string;
-    
+
     [Column('NAME', [TColumnProp.Required], 100)]
-    [Description('A user defined name for the site.')]
+    [Required]
     FName: string;
-    
+
     [Column('ADDRESS', [TColumnProp.Required], 255)]
-    [Description('The address of the site.')]
+    [Required]
     FAddress: string;
-    
+
     [Column('POSTCODE', [TColumnProp.Required], 8)]
-    [Description('The postcode of the site.')]
+    [Required]
     FPostcode: string;
-    
+
     [Column('STATE', [TColumnProp.Required], 15)]
-    [Description('The state of the site e.g. Active, Inactive.')]
-    FStatus: string;
-    
+    [Required]
+    FState: string;
+
     [Column('OPERATOR_NAME', [], 100)]
-    [Description('The operators name, this may be the keeper for an agricultural Holding or the operators namne if an abattoir or rendereing site.')]
-    FOperatorname: Nullable<string>;
-    
+    FOperatorName: Nullable<string>;
+
     [Column('OPERATOR_ADDRESS', [], 255)]
-    [Description('The operators address, this is the correspondence address and may be different to the site address.')]
-    FOperatoraddress: Nullable<string>;
-    
+    FOperatorAddress: Nullable<string>;
+
     [Column('OPERATOR_POSTCODE', [], 8)]
-    [Description('The operators postcode.')]
-    FOperatorpostcode: Nullable<string>;
-    
-    [Column('OPERATOR_FLAG', [])]
-    [Description('A flag indicating if the site belongs to the application operator.')]
-    FOperatorflag: Nullable<Boolean>;
-    
+    FOperatorPostcode: Nullable<string>;
+
+    [Column('OPERATOR_FLAG', [TColumnProp.Required])]
+    [Required]
+    FOperatorFlag: Boolean;
+
     [ManyValuedAssociation([TAssociationProp.Lazy, TAssociationProp.Required], [TCascadeType.SaveUpdate, TCascadeType.Merge, TCascadeType.Remove], 'FSiteId')]
     FSiteContactList: Proxy<TList<TSiteContact>>;
+
+    [ManyValuedAssociation([TAssociationProp.Lazy, TAssociationProp.Required], [TCascadeType.SaveUpdate, TCascadeType.Merge, TCascadeType.Remove], 'FSiteId')]
+    FSiteMarkList: Proxy<TList<TSiteMark>>;
+
     function GetSiteContactList: TList<TSiteContact>;
+    function GetSiteMarkList: TList<TSiteMark>;
+
   public
     constructor Create;
     destructor Destroy; override;
     property Id: string read FId write FId;
-    property Sitetype: string read FSitetype write FSitetype;
+    property SiteType: string read FSiteType write FSiteType;
     property Identifier: string read FIdentifier write FIdentifier;
     property Name: string read FName write FName;
     property Address: string read FAddress write FAddress;
     property Postcode: string read FPostcode write FPostcode;
-    property Status: string read FStatus write FStatus;
-    property Operatorname: Nullable<string> read FOperatorname write FOperatorname;
-    property Operatoraddress: Nullable<string> read FOperatoraddress write FOperatoraddress;
-    property Operatorpostcode: Nullable<string> read FOperatorpostcode write FOperatorpostcode;
-    property Operatorflag: Nullable<Boolean> read FOperatorflag write FOperatorflag;
+    property State: string read FState write FState;
+    property OperatorName: Nullable<string> read FOperatorName write FOperatorName;
+    property OperatorAddress: Nullable<string> read FOperatorAddress write FOperatorAddress;
+    property OperatorPostcode: Nullable<string> read FOperatorPostcode write FOperatorPostcode;
+    property OperatorFlag: Boolean read FOperatorFlag write FOperatorFlag;
     property SiteContactList: TList<TSiteContact> read GetSiteContactList;
+    property SiteMarkList: TList<TSiteMark> read GetSiteMarkList;
   end;
-  
+
   [Entity]
   [Table('SITE_CONTACTS')]
-  [Description('')]
-  [Id('FId', TIdGenerator.None)]
+  [Id('FId', TIdGenerator.Uuid36)]
   TSiteContact = class
   private
     [Column('ID', [TColumnProp.Required], 36)]
-    [Description('')]
     FId: string;
-    
+
     [Column('NAME', [TColumnProp.Required], 100)]
-    [Description('')]
     FName: string;
-    
+
     [Column('LANDLINE', [], 50)]
-    [Description('')]
     FLandline: Nullable<string>;
-    
+
     [Column('MOBILE', [], 50)]
-    [Description('')]
     FMobile: Nullable<string>;
-    
+
     [Column('EMAIL', [], 255)]
-    [Description('')]
     FEmail: Nullable<string>;
-    
+
     [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
     [JoinColumn('SITE_ID', [TColumnProp.Required], 'ID')]
-    [Description('')]
     FSiteId: Proxy<TSite>;
+
     function GetSiteId: TSite;
     procedure SetSiteId(const Value: TSite);
+
   public
     property Id: string read FId write FId;
     property Name: string read FName write FName;
@@ -128,95 +125,40 @@ type
     property Email: Nullable<string> read FEmail write FEmail;
     property SiteId: TSite read GetSiteId write SetSiteId;
   end;
-  
+
   [Entity]
   [Table('SITE_MARK')]
-  [Description('')]
-  [Id('FId', TIdGenerator.None)]
+  [Id('FId', TIdGenerator.Uuid36)]
   TSiteMark = class
   private
     [Column('ID', [TColumnProp.Required], 36)]
-    [Description('')]
     FId: string;
-    
+
     [Column('MARK', [TColumnProp.Required], 50)]
-    [Description('')]
     FMark: string;
-    
-    [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
-    [JoinColumn('SPECIES_ID', [TColumnProp.Required], 'ID')]
-    [Description('')]
-    FSpeciedid: Proxy<TSpecies>;
-    
+
     [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
     [JoinColumn('SITE_ID', [TColumnProp.Required], 'ID')]
-    [Description('')]
-    FSiteid: Proxy<TSite>;
-    function GetSpeciedid: TSpecies;
-    procedure SetSpeciedid(const Value: TSpecies);
-    function GetSiteid: TSite;
-    procedure SetSiteid(const Value: TSite);
+    FSiteId: Proxy<TSite>;
+
+    [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
+    [JoinColumn('SPECIES_ID', [TColumnProp.Required], 'ID')]
+    FSpeciesId: Proxy<TSpecies>;  // Use TSpecies from uAnimalModel
+
+    function GetSiteId: TSite;
+    procedure SetSiteId(const Value: TSite);
+    function GetSpeciesId: TSpecies;
+    procedure SetSpeciesId(const Value: TSpecies);
+    function GetSpecies: String;
+
   public
     property Id: string read FId write FId;
     property Mark: string read FMark write FMark;
-    property Speciedid: TSpecies read GetSpeciedid write SetSpeciedid;
-    property Siteid: TSite read GetSiteid write SetSiteid;
-  end;
-  
-  [Entity]
-  [Table('SITE_SPECIES')]
-  [Description('')]
-  [Id('FId', TIdGenerator.None)]
-  TSiteSpecy = class
-  private
-    [Column('ID', [TColumnProp.Required], 36)]
-    [Description('')]
-    FId: string;
-    
-    [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
-    [JoinColumn('SPECIES_ID', [TColumnProp.Required], 'ID')]
-    [Description('')]
-    FSpeciesId: Proxy<TSpecies>;
-    
-    [Association([TAssociationProp.Lazy, TAssociationProp.Required], CascadeTypeAll - [TCascadeType.Remove])]
-    [JoinColumn('SITE_ID', [TColumnProp.Required], 'ID')]
-    [Description('')]
-    FSiteId: Proxy<TSite>;
-    function GetSpeciesId: TSpecies;
-    procedure SetSpeciesId(const Value: TSpecies);
-    function GetSiteId: TSite;
-    procedure SetSiteId(const Value: TSite);
-  public
-    property Id: string read FId write FId;
-    property SpeciesId: TSpecies read GetSpeciesId write SetSpeciesId;
     property SiteId: TSite read GetSiteId write SetSiteId;
+    property SpeciesId: TSpecies read GetSpeciesId write SetSpeciesId;
+    property Species: string read GetSpecies;
   end;
-  
-  [Entity]
-  [Table('SPECIES')]
-  [Description('')]
-  [Id('FId', TIdGenerator.None)]
-  TSpecies = class
-  private
-    [Column('ID', [TColumnProp.Required], 36)]
-    [Description('')]
-    FId: string;
-    
-    [Column('SPECIES', [TColumnProp.Required], 50)]
-    [Description('')]
-    FSpecies: string;
-    
-    [ManyValuedAssociation([TAssociationProp.Lazy, TAssociationProp.Required], [TCascadeType.SaveUpdate, TCascadeType.Merge, TCascadeType.Remove], 'FSpeciedid')]
-    FSiteMarkList: Proxy<TList<TSiteMark>>;
-    function GetSiteMarkList: TList<TSiteMark>;
-  public
-    constructor Create;
-    destructor Destroy; override;
-    property Id: string read FId write FId;
-    property Species: string read FSpecies write FSpecies;
-    property SiteMarkList: TList<TSiteMark> read GetSiteMarkList;
-  end;
-  
+
 implementation
 
 { TSite }
@@ -225,24 +167,31 @@ constructor TSite.Create;
 begin
   inherited;
   FSiteContactList.SetInitialValue(TList<TSiteContact>.Create);
+  FSiteMarkList.SetInitialValue(TList<TSiteMark>.Create);
 end;
 
 destructor TSite.Destroy;
 begin
   FSiteContactList.DestroyValue;
+  FSiteMarkList.DestroyValue;
   inherited;
 end;
 
 function TSite.GetSiteContactList: TList<TSiteContact>;
 begin
-  result := FSiteContactList.Value;
+  Result := FSiteContactList.Value;
+end;
+
+function TSite.GetSiteMarkList: TList<TSiteMark>;
+begin
+  Result := FSiteMarkList.Value;
 end;
 
 { TSiteContact }
 
 function TSiteContact.GetSiteId: TSite;
 begin
-  result := FSiteId.Value;
+  Result := FSiteId.Value;
 end;
 
 procedure TSiteContact.SetSiteId(const Value: TSite);
@@ -252,72 +201,37 @@ end;
 
 { TSiteMark }
 
-function TSiteMark.GetSpeciedid: TSpecies;
+function TSiteMark.GetSiteId: TSite;
 begin
-  result := FSpeciedid.Value;
+  Result := FSiteId.Value;
 end;
 
-procedure TSiteMark.SetSpeciedid(const Value: TSpecies);
-begin
-  FSpeciedid.Value := Value;
-end;
-
-function TSiteMark.GetSiteid: TSite;
-begin
-  result := FSiteid.Value;
-end;
-
-procedure TSiteMark.SetSiteid(const Value: TSite);
-begin
-  FSiteid.Value := Value;
-end;
-
-{ TSiteSpecy }
-
-function TSiteSpecy.GetSpeciesId: TSpecies;
-begin
-  result := FSpeciesId.Value;
-end;
-
-procedure TSiteSpecy.SetSpeciesId(const Value: TSpecies);
-begin
-  FSpeciesId.Value := Value;
-end;
-
-function TSiteSpecy.GetSiteId: TSite;
-begin
-  result := FSiteId.Value;
-end;
-
-procedure TSiteSpecy.SetSiteId(const Value: TSite);
+procedure TSiteMark.SetSiteId(const Value: TSite);
 begin
   FSiteId.Value := Value;
 end;
 
-{ TSpecies }
-
-constructor TSpecies.Create;
+function TSiteMark.GetSpeciesId: TSpecies;
 begin
-  inherited;
-  FSiteMarkList.SetInitialValue(TList<TSiteMark>.Create);
+  Result := FSpeciesId.Value;
 end;
 
-destructor TSpecies.Destroy;
+procedure TSiteMark.SetSpeciesId(const Value: TSpecies);
 begin
-  FSiteMarkList.DestroyValue;
-  inherited;
+  FSpeciesId.Value := Value;
 end;
 
-function TSpecies.GetSiteMarkList: TList<TSiteMark>;
+function TSiteMark.GetSpecies: string;
 begin
-  result := FSiteMarkList.Value;
+  if Assigned(FSpeciesId.Value) then
+    Result := FSpeciesId.Value.Species  // Access the 'Species' field from TSpecies
+  else
+    Result := '';
 end;
 
 initialization
   RegisterEntity(TSite);
   RegisterEntity(TSiteContact);
-  RegisterEntity(TSpecies);
   RegisterEntity(TSiteMark);
-  RegisterEntity(TSiteSpecy);
 
 end.

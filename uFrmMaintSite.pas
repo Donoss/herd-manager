@@ -105,7 +105,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataManager, uSiteModel, uSiteData, uDataUtils, uFrmMarkDialog;
+uses uSiteModel, uSiteData, uDataUtils, uFrmMarkDialog;
 
 procedure TFrmMaintSite.btnAddClick(Sender: TObject);
 begin
@@ -154,19 +154,19 @@ end;
 
 procedure TFrmMaintSite.CancelAndClose;
 begin
-  if SiteData.AureliusDatasetSite.State in [dsEdit, dsInsert] then
+ { if SiteData.AureliusDatasetSite.State in [dsEdit, dsInsert] then
     SiteData.AureliusDatasetSite.Cancel;
 
-  ModalResult := mrCancel; // Sets the result for modal forms
+  ModalResult := mrCancel; // Sets the result for modal forms     }
 end;
 
 procedure TFrmMaintSite.DataSource1DataChange(Sender: TObject; Field: TField);
 begin
-  Panel1.Caption := ' '
+{  Panel1.Caption := ' '
     + SiteData.dsSite.Dataset.FieldByName('Name').AsString
     + ' ('
     + SiteData.dsSite.Dataset.FieldByName('Identifier').AsString
-    + ')';
+    + ')';  }
 end;
 
 procedure TFrmMaintSite.DBEdit3Exit(Sender: TObject);
@@ -274,7 +274,7 @@ var
   Error: IValidationError;
   ValidationMessages: string;
 begin
-  SiteEntity := SiteData.AureliusDatasetSite.Current<TSite>;
+ { SiteEntity := SiteData.AureliusDatasetSite.Current<TSite>;
 
   try
     SiteData.AureliusDatasetSite.Post;
@@ -307,14 +307,14 @@ begin
     end;
   end;
 
-  ModalResult := mrClose; // Sets the result for modal forms
+  ModalResult := mrClose; // Sets the result for modal forms    }
 
 end;
 
 procedure TFrmMaintSite.SetEditMode(AEditMode: TEditMode);
 begin
   FEditMode := AEditMode;
-  case FEditMode of
+ { case FEditMode of
     emAdd:
       begin
         Caption := 'Add New Site';
@@ -332,7 +332,7 @@ begin
         Caption := 'Edit Site';
         SiteData.dsSite.Dataset.Edit;
       end;
-  end;
+  end;         }
 end;
 
 procedure TFrmMaintSite.TabSheetSiteShow(Sender: TObject);
@@ -352,7 +352,7 @@ end;
 procedure TFrmMaintSite.OpenMarkDialog(AEditMode: TEditMode);
 begin
   // Check if FrmMaintSite is nil or create a new instance
-  if not Assigned(FrmMaintSite) then
+{  if not Assigned(FrmMaintSite) then
     FrmMarkDialog := TFrmMarkDialog.Create(nil);
 
   try
@@ -360,7 +360,7 @@ begin
     FrmMarkDialog.ShowModal;  // Open the form modally (or Show if non-modal)
   finally
     SiteData.dsSiteMark.DataSet.Refresh;
-  end;
+  end;                }
 end;
 
 end.

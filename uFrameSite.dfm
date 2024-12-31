@@ -1,4 +1,4 @@
-object FrameOurSites: TFrameOurSites
+object FrameSites: TFrameSites
   Left = 0
   Top = 0
   Width = 1664
@@ -6,33 +6,36 @@ object FrameOurSites: TFrameOurSites
   Align = alClient
   TabOrder = 0
   Visible = False
-  object Panel3: TPanel
-    Left = 0
-    Top = 0
-    Width = 464
-    Height = 926
+  object GroupBox3: TGroupBox
+    Left = 250
+    Top = 54
+    Width = 1414
+    Height = 872
     Align = alClient
-    AutoSize = True
-    BevelInner = bvRaised
-    BevelOuter = bvNone
-    Caption = 'Panel3'
+    Caption = 'Sites'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     object DBGrid1: TDBGrid
-      Left = 1
-      Top = 58
-      Width = 462
-      Height = 867
+      Left = 2
+      Top = 23
+      Width = 210
+      Height = 847
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
       Margins.Bottom = 10
       Align = alClient
       BorderStyle = bsNone
-      DataSource = SiteData.dsSite
+      DataSource = SiteData.dsSites
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
-      Font.Name = 'JetBrains Mono'
+      Font.Name = 'Segoe UI'
       Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
@@ -40,558 +43,622 @@ object FrameOurSites: TFrameOurSites
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -12
-      TitleFont.Name = 'JetBrains Mono'
-      TitleFont.Style = []
-      OnDblClick = DBGrid1DblClick
+      TitleFont.Height = -16
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = [fsBold]
     end
-    object Panel2: TPanel
-      Left = 1
-      Top = 1
-      Width = 462
-      Height = 57
-      Align = alTop
-      BevelOuter = bvNone
-      Caption = 'Panel2'
-      ShowCaption = False
+    object SplitView2: TSplitView
+      Left = 212
+      Top = 23
+      Width = 1200
+      Height = 847
+      AnimationDelay = 5
+      AnimationStep = 200
+      BevelEdges = []
+      CompactWidth = 0
+      FullRepaint = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      OpenedWidth = 1200
+      ParentFont = False
+      Placement = svpRight
       TabOrder = 1
-      DesignSize = (
-        462
-        57)
-      object btnCloseView: TButton
-        Left = 410
+      object Panel5: TPanel
+        Left = 0
         Top = 0
-        Width = 50
-        Height = 57
-        Anchors = [akTop, akRight, akBottom]
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ImageAlignment = iaCenter
-        ImageIndex = 15
-        ImageName = 'next64'
-        Images = DataManager.VirtualImageList2
-        ParentFont = False
+        Width = 1200
+        Height = 1090
+        Caption = 'Panel5'
+        ShowCaption = False
         TabOrder = 0
-        OnClick = btnCloseViewClick
+        object GroupBox1: TGroupBox
+          AlignWithMargins = True
+          Left = 13
+          Top = 1
+          Width = 1174
+          Height = 330
+          Margins.Left = 12
+          Margins.Top = 0
+          Margins.Right = 12
+          Margins.Bottom = 12
+          Align = alTop
+          Caption = 'Site'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          object Label5: TLabel
+            Left = 14
+            Top = 33
+            Width = 36
+            Height = 21
+            Caption = 'Type'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label1: TLabel
+            Left = 13
+            Top = 73
+            Width = 126
+            Height = 21
+            Caption = 'Holding number'
+            FocusControl = DBEdit1
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label3: TLabel
+            Left = 13
+            Top = 108
+            Width = 46
+            Height = 21
+            Caption = 'Name'
+            FocusControl = DBEdit2
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label4: TLabel
+            Left = 13
+            Top = 143
+            Width = 60
+            Height = 21
+            Caption = 'Address'
+            FocusControl = DBEdit3
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label6: TLabel
+            Left = 13
+            Top = 178
+            Width = 70
+            Height = 21
+            Caption = 'Postcode'
+            FocusControl = DBEdit4
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label7: TLabel
+            Left = 13
+            Top = 213
+            Width = 39
+            Height = 21
+            Caption = 'State'
+            FocusControl = DBEdit5
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBLookupComboBox1: TDBLookupComboBox
+            Left = 165
+            Top = 35
+            Width = 225
+            Height = 29
+            DataField = 'SITE_TYPE_ID'
+            DataSource = SiteData.dsSites
+            KeyField = 'ID'
+            ListField = 'SITE_TYPE'
+            ListSource = SiteData.dsLkupSiteTypes
+            TabOrder = 0
+          end
+          object DBEdit1: TDBEdit
+            Left = 165
+            Top = 70
+            Width = 225
+            Height = 29
+            DataField = 'HOLDING_NUMBER'
+            DataSource = SiteData.dsSites
+            TabOrder = 1
+          end
+          object DBCheckBox2: TDBCheckBox
+            Left = 13
+            Top = 245
+            Width = 169
+            Height = 17
+            Alignment = taLeftJustify
+            Caption = 'Owned by us'
+            DataField = 'IS_OWNED'
+            DataSource = SiteData.dsSites
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+          end
+          object DBEdit2: TDBEdit
+            Left = 165
+            Top = 105
+            Width = 577
+            Height = 29
+            DataField = 'NAME'
+            DataSource = SiteData.dsSites
+            TabOrder = 3
+          end
+          object DBEdit3: TDBEdit
+            Left = 165
+            Top = 140
+            Width = 577
+            Height = 29
+            DataField = 'ADDRESS'
+            DataSource = SiteData.dsSites
+            TabOrder = 4
+          end
+          object DBEdit4: TDBEdit
+            Left = 165
+            Top = 175
+            Width = 121
+            Height = 29
+            DataField = 'POSTCODE'
+            DataSource = SiteData.dsSites
+            TabOrder = 5
+          end
+          object DBEdit5: TDBEdit
+            Left = 165
+            Top = 210
+            Width = 121
+            Height = 29
+            DataField = 'STATE'
+            DataSource = SiteData.dsSites
+            TabOrder = 6
+          end
+        end
+        object GroupBox4: TGroupBox
+          AlignWithMargins = True
+          Left = 13
+          Top = 343
+          Width = 1174
+          Height = 372
+          Margins.Left = 12
+          Margins.Top = 0
+          Margins.Right = 12
+          Margins.Bottom = 12
+          Align = alTop
+          Caption = 'Contacts'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          object SplitView4: TSplitView
+            AlignWithMargins = True
+            Left = 560
+            Top = 29
+            Width = 600
+            Height = 335
+            Margins.Left = 12
+            Margins.Top = 6
+            Margins.Right = 12
+            Margins.Bottom = 6
+            AnimationDelay = 5
+            AnimationStep = 100
+            BevelOuter = bvLowered
+            CompactWidth = 1
+            OpenedWidth = 600
+            Placement = svpRight
+            TabOrder = 0
+            StyleName = 'Material Oxford Blue'
+            object Label13: TLabel
+              Left = 16
+              Top = 68
+              Width = 34
+              Height = 21
+              Caption = 'Role'
+              FocusControl = DBEdit2
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label14: TLabel
+              Left = 16
+              Top = 100
+              Width = 46
+              Height = 21
+              Caption = 'Name'
+              FocusControl = DBEdit10
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label15: TLabel
+              Left = 16
+              Top = 132
+              Width = 66
+              Height = 21
+              Caption = 'Landline'
+              FocusControl = DBEdit11
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label16: TLabel
+              Left = 16
+              Top = 164
+              Width = 54
+              Height = 21
+              Caption = 'Mobile'
+              FocusControl = DBEdit12
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label17: TLabel
+              Left = 16
+              Top = 196
+              Width = 43
+              Height = 21
+              Caption = 'Email'
+              FocusControl = DBEdit13
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object DBLookupComboBox3: TDBLookupComboBox
+              Left = 104
+              Top = 64
+              Width = 145
+              Height = 29
+              Margins.Top = 12
+              DataField = 'ROLE_ID'
+              DataSource = SiteData.dsSiteContacts
+              KeyField = 'ID'
+              ListField = 'ROLE'
+              ListSource = SiteData.dsLkupSiteRoles
+              TabOrder = 0
+            end
+            object DBEdit10: TDBEdit
+              Left = 104
+              Top = 96
+              Width = 462
+              Height = 29
+              Margins.Top = 12
+              DataField = 'NAME'
+              DataSource = SiteData.dsSiteContacts
+              TabOrder = 1
+            end
+            object DBEdit11: TDBEdit
+              Left = 104
+              Top = 128
+              Width = 145
+              Height = 29
+              Margins.Top = 12
+              DataField = 'LANDLINE'
+              DataSource = SiteData.dsSiteContacts
+              TabOrder = 2
+            end
+            object DBEdit12: TDBEdit
+              Left = 104
+              Top = 160
+              Width = 145
+              Height = 29
+              Margins.Top = 12
+              DataField = 'MOBILE'
+              DataSource = SiteData.dsSiteContacts
+              TabOrder = 3
+            end
+            object DBEdit13: TDBEdit
+              Left = 104
+              Top = 192
+              Width = 462
+              Height = 29
+              Margins.Top = 12
+              DataField = 'EMAIL'
+              DataSource = SiteData.dsSiteContacts
+              TabOrder = 4
+            end
+            object Panel1: TPanel
+              Left = 1
+              Top = 1
+              Width = 598
+              Height = 40
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = ' Update contact'
+              TabOrder = 5
+            end
+            object Panel3: TPanel
+              Left = 1
+              Top = 294
+              Width = 598
+              Height = 40
+              Align = alBottom
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = 'Creating new contact'
+              ShowCaption = False
+              TabOrder = 6
+              object btnCancelContact: TSpeedButton
+                Left = 498
+                Top = 0
+                Width = 100
+                Height = 40
+                Align = alRight
+                Caption = 'Cancel'
+                ImageIndex = 8
+                ImageName = 'cancel64'
+                Images = Images.VirtualImageListHeight24
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                ExplicitLeft = 496
+              end
+              object btnSaveContact: TSpeedButton
+                Left = 398
+                Top = 0
+                Width = 100
+                Height = 40
+                Align = alRight
+                Caption = 'Save'
+                ImageIndex = 6
+                ImageName = 'save64'
+                Images = Images.VirtualImageListHeight24
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                ExplicitLeft = 402
+              end
+            end
+          end
+          object Panel2: TPanel
+            Left = 2
+            Top = 23
+            Width = 546
+            Height = 347
+            Align = alClient
+            Caption = 'Panel2'
+            TabOrder = 1
+            object Panel4: TPanel
+              Left = 1
+              Top = 1
+              Width = 544
+              Height = 48
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = ' Update contact'
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 0
+              object SpeedButton4: TSpeedButton
+                Left = 447
+                Top = 0
+                Width = 97
+                Height = 48
+                Align = alRight
+                Caption = 'New'
+                ImageIndex = 9
+                ImageName = 'add64'
+                Images = Images.VirtualImageListHeight24
+                ExplicitLeft = 1073
+              end
+              object SpeedButton5: TSpeedButton
+                Left = 0
+                Top = 0
+                Width = 48
+                Height = 48
+                Hint = 'Open or close the right hand panel'
+                Align = alLeft
+                ImageIndex = 24
+                ImageName = 'right_panel_open_64dp'
+                Images = Images.VirtualImageListHeight24
+                ParentShowHint = False
+                ShowHint = True
+              end
+            end
+            object DBGrid2: TDBGrid
+              AlignWithMargins = True
+              Left = 13
+              Top = 55
+              Width = 520
+              Height = 285
+              Margins.Left = 12
+              Margins.Top = 6
+              Margins.Right = 12
+              Margins.Bottom = 6
+              Align = alClient
+              DataSource = SiteData.dsSiteContacts
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -16
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Style = [fsBold]
+            end
+          end
+        end
       end
     end
   end
-  object SplitView2: TSplitView
-    Left = 464
-    Top = 0
-    Width = 1200
-    Height = 926
-    AnimationDelay = 5
-    AnimationStep = 200
-    BevelEdges = []
-    CloseStyle = svcCompact
-    CompactWidth = 0
-    FullRepaint = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'JetBrains Mono'
-    Font.Style = []
-    OpenedWidth = 1200
-    ParentFont = False
-    Placement = svpRight
+  object SplitView1: TSplitView
+    Left = 0
+    Top = 54
+    Width = 250
+    Height = 872
+    OpenedWidth = 250
+    Placement = svpLeft
     TabOrder = 1
-    OnClosing = SplitView2Closing
-    OnOpening = SplitView2Opening
-    object Panel1: TPanel
+    object GroupBox2: TGroupBox
+      AlignWithMargins = True
+      Left = 6
+      Top = 12
+      Width = 232
+      Height = 848
+      Margins.Left = 6
+      Margins.Top = 12
+      Margins.Right = 12
+      Margins.Bottom = 12
+      Align = alClient
+      Caption = 'Filters && Search'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object Label2: TLabel
+        Left = 16
+        Top = 76
+        Width = 36
+        Height = 21
+        Caption = 'Type'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object ComboBox2: TComboBox
+        Left = 73
+        Top = 75
+        Width = 144
+        Height = 29
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 0
+        Text = 'Farm'
+        Items.Strings = (
+          'Farm'
+          'Collection Centre'
+          'Assembly Centre'
+          'Abattoir'
+          'Market')
+      end
+      object CheckBox1: TCheckBox
+        Left = 16
+        Top = 43
+        Width = 201
+        Height = 17
+        Alignment = taLeftJustify
+        Caption = 'Owned by us'
+        TabOrder = 1
+      end
+    end
+  end
+  object ToolBar3: TToolBar
+    AlignWithMargins = True
+    Left = 0
+    Top = 0
+    Width = 1664
+    Height = 54
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    AutoSize = True
+    ButtonHeight = 54
+    ButtonWidth = 55
+    Caption = 'ToolBar1'
+    Images = Images.VirtualImageListHeight24
+    TabOrder = 2
+    object ToolButton7: TToolButton
       Left = 0
       Top = 0
-      Width = 1200
-      Height = 57
-      Align = alTop
-      AutoSize = True
-      BevelOuter = bvLowered
-      Caption = 'Our Sites'
-      TabOrder = 0
-      object btnEdit: TButton
-        Left = 1099
-        Top = 1
-        Width = 50
-        Height = 55
-        Align = alRight
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ImageAlignment = iaCenter
-        ImageIndex = 10
-        ImageName = 'edit64'
-        Images = DataManager.VirtualImageList2
-        ParentFont = False
-        TabOrder = 0
-        OnClick = btnEditClick
-      end
-      object btnAdd: TButton
-        Left = 1149
-        Top = 1
-        Width = 50
-        Height = 55
-        Align = alRight
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ImageAlignment = iaCenter
-        ImageIndex = 9
-        ImageName = 'add64'
-        Images = DataManager.VirtualImageList2
-        ParentFont = False
-        TabOrder = 1
-        OnClick = btnAddClick
-      end
+      Caption = 'ToolButton7'
+      Down = True
+      ImageIndex = 18
+      ImageName = 'filter64'
+      Style = tbsCheck
     end
-    object Panel4: TPanel
-      Left = 1071
-      Top = 57
-      Width = 129
-      Height = 869
-      Align = alRight
-      BevelOuter = bvNone
-      Caption = 'Panel1'
-      ShowCaption = False
-      TabOrder = 1
-      object DBCheckBox1: TDBCheckBox
-        Left = 0
-        Top = 8
-        Width = 97
-        Height = 17
-        Caption = 'Site'
-        DataField = 'SiteDetailsFlag'
-        DataSource = SiteData.dsSite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-      object DBCheckBox2: TDBCheckBox
-        Left = 0
-        Top = 31
-        Width = 97
-        Height = 17
-        Caption = 'Keeper'
-        DataField = 'OperatorDetailsFlag'
-        DataSource = SiteData.dsSite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-      end
-      object DBCheckBox3: TDBCheckBox
-        Left = 0
-        Top = 54
-        Width = 97
-        Height = 17
-        Caption = 'Contacts'
-        DataField = 'OperatorDetailsFlag'
-        DataSource = SiteData.dsSite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'JetBrains Mono'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-      end
+    object ToolButton5: TToolButton
+      Left = 55
+      Top = 0
+      Caption = 'ToolButton5'
+      Down = True
+      ImageIndex = 23
+      ImageName = 'left_panel_open_64dp'
     end
-    object Panel5: TPanel
-      Left = 0
-      Top = 57
-      Width = 1071
-      Height = 869
-      Align = alClient
-      Caption = 'Panel5'
-      ShowCaption = False
-      TabOrder = 2
-      ExplicitLeft = 3
-      ExplicitTop = 64
-      object GroupBox1: TGroupBox
-        AlignWithMargins = True
-        Left = 13
-        Top = 2
-        Width = 1045
-        Height = 248
-        Margins.Left = 12
-        Margins.Top = 1
-        Margins.Right = 12
-        Margins.Bottom = 12
-        Align = alTop
-        Caption = 'Site'
-        TabOrder = 0
-        ExplicitLeft = 24
-        ExplicitTop = 6
-        ExplicitWidth = 1017
-        DesignSize = (
-          1045
-          248)
-        object Label5: TLabel
-          Left = 17
-          Top = 33
-          Width = 40
-          Height = 21
-          Caption = 'Type'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label6: TLabel
-          Left = 17
-          Top = 69
-          Width = 140
-          Height = 21
-          Caption = 'Holding Number'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label7: TLabel
-          Left = 17
-          Top = 104
-          Width = 40
-          Height = 21
-          Caption = 'Name'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label8: TLabel
-          Left = 17
-          Top = 139
-          Width = 70
-          Height = 21
-          Caption = 'Address'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label9: TLabel
-          Left = 17
-          Top = 174
-          Width = 80
-          Height = 21
-          Caption = 'Postcode'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label10: TLabel
-          Left = 17
-          Top = 209
-          Width = 50
-          Height = 21
-          Caption = 'State'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object DBText1: TDBText
-          Left = 176
-          Top = 33
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'SiteType'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText2: TDBText
-          Left = 176
-          Top = 69
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'Identifier'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText3: TDBText
-          Left = 176
-          Top = 104
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'Name'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText4: TDBText
-          Left = 176
-          Top = 139
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'Address'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText5: TDBText
-          Left = 176
-          Top = 174
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'Postcode'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText6: TDBText
-          Left = 176
-          Top = 209
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'State'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-      end
-      object GroupBox3: TGroupBox
-        AlignWithMargins = True
-        Left = 13
-        Top = 657
-        Width = 1045
-        Height = 194
-        Margins.Left = 12
-        Margins.Top = 12
-        Margins.Right = 12
-        Margins.Bottom = 12
-        Align = alTop
-        Caption = 'Contacts'
-        TabOrder = 1
-        ExplicitLeft = 24
-        ExplicitTop = 655
-        ExplicitWidth = 1017
-      end
-      object GroupBox2: TGroupBox
-        AlignWithMargins = True
-        Left = 13
-        Top = 274
-        Width = 1045
-        Height = 142
-        Margins.Left = 12
-        Margins.Top = 12
-        Margins.Right = 12
-        Margins.Bottom = 12
-        Align = alTop
-        Caption = 'Keeper'
-        TabOrder = 2
-        ExplicitLeft = 24
-        ExplicitTop = 275
-        ExplicitWidth = 1017
-        DesignSize = (
-          1045
-          142)
-        object Label2: TLabel
-          Left = 16
-          Top = 40
-          Width = 40
-          Height = 21
-          Caption = 'Name'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label3: TLabel
-          Left = 16
-          Top = 70
-          Width = 70
-          Height = 21
-          Caption = 'Address'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label4: TLabel
-          Left = 16
-          Top = 104
-          Width = 80
-          Height = 21
-          Caption = 'Postcode'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object DBText7: TDBText
-          Left = 176
-          Top = 40
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'OperatorName'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText8: TDBText
-          Left = 176
-          Top = 72
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'OperatorAddress'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-        object DBText9: TDBText
-          Left = 176
-          Top = 104
-          Width = 829
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          Color = clBtnFace
-          DataField = 'OperatorPostcode'
-          DataSource = SiteData.dsSite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'JetBrains Mono'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          ExplicitWidth = 801
-        end
-      end
-      object GroupBox4: TGroupBox
-        AlignWithMargins = True
-        Left = 13
-        Top = 440
-        Width = 1045
-        Height = 193
-        Margins.Left = 12
-        Margins.Top = 12
-        Margins.Right = 12
-        Margins.Bottom = 12
-        Align = alTop
-        Caption = 'Marks'
-        TabOrder = 3
-        ExplicitLeft = 24
-        ExplicitWidth = 1017
-        object DBGrid2: TDBGrid
-          AlignWithMargins = True
-          Left = 14
-          Top = 35
-          Width = 1017
-          Height = 144
-          Margins.Left = 12
-          Margins.Top = 12
-          Margins.Right = 12
-          Margins.Bottom = 12
-          Align = alClient
-          DataSource = SiteData.dsSiteMark
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -16
-          TitleFont.Name = 'JetBrains Mono'
-          TitleFont.Style = []
-        end
-      end
-    end
+  end
+  object dsContacts: TDataSource
+    DataSet = SiteData.FDQuerySiteContacts
+    Left = 1636
+    Top = 652
   end
 end

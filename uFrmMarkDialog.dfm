@@ -65,7 +65,6 @@ object FrmMarkDialog: TFrmMarkDialog
       Font.Style = []
       ImageIndex = 6
       ImageName = 'save64'
-      Images = DataManager.VirtualImageList1
       ParentFont = False
       TabOrder = 0
       OnClick = btnSaveClick
@@ -84,7 +83,6 @@ object FrmMarkDialog: TFrmMarkDialog
       Font.Style = []
       ImageIndex = 8
       ImageName = 'cancel64'
-      Images = DataManager.VirtualImageList1
       ModalResult = 2
       ParentFont = False
       TabOrder = 1
@@ -127,7 +125,6 @@ object FrmMarkDialog: TFrmMarkDialog
     TabOrder = 2
   end
   object DataSource1: TDataSource
-    DataSet = SiteData.AureliusDatasetSite
     Left = 116
     Top = 49
   end

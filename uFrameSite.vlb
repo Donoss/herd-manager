@@ -1,13 +1,4 @@
-﻿[DBGrid1]
-Coordinates=82,456,64,36
-
-[SplitView2]
-Coordinates=529,320,75,58
-
-[Panel3]
+﻿[]
 Coordinates=401,320,55,58
-
-[]
-Coordinates=692,10,98,58
 Visible=True
 

@@ -20,7 +20,6 @@ type
     btnMovements: TButton;
     btnTagging: TButton;
     btnDeaths: TButton;
-    ComboBox1: TComboBox;
     Panel2: TPanel;
     Label1: TLabel;
     btnDashboard: TButton;
@@ -29,7 +28,8 @@ type
     btnOtherSites: TButton;
     ComboBox2: TComboBox;
     Label2: TLabel;
-    FrameOurSites: TFrameOurSites;
+    FrameSites: TFrameSites;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure btnOurSitesClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
@@ -63,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataManager, uSiteModel, uSiteData, uAnimalData;
+uses uSiteModel, uSiteData, uAnimalData, uImages;
 
 procedure TfrmMain.ArrangeSpeciesButtons;
 var
@@ -143,9 +143,11 @@ procedure TfrmMain.btnOurSitesClick(Sender: TObject);
 
 begin
   AppContext := cOurSites;
-  SiteData.GetOurSitesList;
-  FrameOurSites.Align := alClient;
-  FrameOursites.Visible := true;
+  SiteData.GetSitesList;
+  FrameSites.Align := alClient;
+  FrameSites.Visible := true;
+  //FrameSites.pnlFilters.ShowCaption := False;
+ // FrameSites.pnlButtons.ShowCaption := False;
 
 end;
 
@@ -156,7 +158,7 @@ end;
 
 procedure TfrmMain.EnableSpeciesView;
 begin
-  if (ComboBox1.Text = 'Wildboar') or (ComboBox1.Text = 'Pigs') then
+ { if (ComboBox1.Text = 'Wildboar') or (ComboBox1.Text = 'Pigs') then
   begin
     // Pigs and Wildboar
     btnTagging.Enabled := True;
@@ -168,7 +170,7 @@ begin
     btnDeaths.Enabled := True;
   end;
 
-  ArrangeSpeciesButtons;
+  ArrangeSpeciesButtons;    }
 
 end;
 
@@ -183,12 +185,12 @@ end;
 
 procedure TfrmMain.Frame11DBGrid1DblClick(Sender: TObject);
 begin
-  FrameOurSites.SplitView2.Open;
+  FrameSites.SplitView2.Open;
 end;
 
 procedure TfrmMain.PopulateSpecies;
 begin
-  ComboBox1.Items.Clear;
+ { ComboBox1.Items.Clear;
   ComboBox1.Items.Add('All');
   AnimalData.AureliusDatasetSpecies.First;
   while not AnimalData.AureliusDatasetSpecies.Eof do
@@ -198,7 +200,7 @@ begin
     AnimalData.AureliusDatasetSpecies.Next;
   end;
 
-  ComboBox1.ItemIndex := 0; // Select 'All'
+  ComboBox1.ItemIndex := 0; // Select 'All'       }
 end;
 
 procedure TfrmMain.SplitView1Closed(Sender: TObject);
